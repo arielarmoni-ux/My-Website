@@ -54,14 +54,52 @@ body.nav-open #site-wrapper {
 
 body.nav-open #side-nav { left: 0; }
 
-/* --- ניווט טקסטואלי עליון --- */
+/* --- ניווט טקסטואלי עליון (ברירת מחדל למסכים רחבים) --- */
 .nav-wrapper { 
     position: absolute; 
     left: 5%; 
     top: 52px; 
     z-index: 4000; 
-    /* מוסיף תנועה חלקה שתואמת בדיוק למהירות של הסיידבר */
-    transition: left 0.9s cubic-bezier(0.23, 1, 0.32, 1); 
+    transition: left 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* זזה חלקה כשהסיידבר נפתח (מיועד למסכים רחבים) */
+body.nav-open .nav-wrapper {
+    left: calc(var(--nav-width) + 3%); 
+}
+
+/* === התאמה קריטית לכל הגדלים (מסכים בינוניים וצרים) === */
+@media (max-width: 950px) {
+    header {
+        padding: 30px 5% 20px;
+        min-height: auto;
+        /* מסדר את האלמנטים מלמעלה למטה בצורה אנכית */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* מרווח קבוע בין התפריט ללוגו */
+    }
+
+    .nav-wrapper {
+        position: static; /* מנטרל את המיקום האבסולוטי שגרם להתנגשות */
+        order: 2; /* שם את התפריט מתחת ללוגו (או 1 אם תרצה מעליו) */
+    }
+    
+    .logo {
+        order: 1;
+        font-size: 24px; /* הקטנה קלה למסכים קטנים */
+        letter-spacing: 3px;
+    }
+
+    .sub-logo {
+        order: 3;
+        margin-top: 0 !important;
+    }
+
+    /* כשהסיידבר נפתח במסכים קטנים, נבטל את תנועת הלפט כדי שלא יברח */
+    body.nav-open .nav-wrapper {
+        left: auto;
+    }
 }
 
 /* כשהסיידבר פתוח, נדחוף את התפריט העליון ימינה כדי שלא יתנגש בלוגו ובסיידבר */
