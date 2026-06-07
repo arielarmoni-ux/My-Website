@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Ariel Armoni | Exhibition Architecture & Design | אריאל ערמוני אדריכל</title>
     <meta name="description" content="Ariel Armoni is an architect and exhibition designer specializing in art installations, children's exhibitions, and interactive exhibits. אריאל ערמוני - אדריכל ומעצב תערוכות.">
     <meta name="keywords" content="Ariel Armoni, Architect, Exhibition Design, Art Installations, Children Exhibitions, Museum Design, אריאל ערמוני, אדריכלות, עיצוב תערוכות, תערוכות אמנות, תערוכות ילדים, עיצוב מוזיאונים">
     <meta name="author" content="Ariel Armoni">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Ariel Armoni | Exhibition Architecture">
     <meta property="og:title" content="Ariel Armoni | Exhibition Architecture & Design">
@@ -15,6 +18,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ariel Armoni | Exhibition Architecture & Design">
     <meta name="twitter:description" content="Ariel Armoni is an architect and exhibition designer specializing in art installations and interactive exhibits.">
+
     <link rel="canonical" href="https://arielarmoni.com/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>A</text></svg>">
     <link rel="stylesheet" href="style.css">
@@ -29,13 +33,10 @@
                     <a href="contact.html" class="nav-label">Contact</a>
                 </div>
             </div>
-            <div class="logo-block">
-                <a href="index.html" class="logo">
-                    <h1 class="logo-h1">ARIEL ARMONI</h1>
-                </a>
-                <div class="sub-logo">Exhibition Architecture</div>
-            </div>
-            <div class="header-right"></div>
+            <a href="index.html" class="logo">
+                <h1 class="logo-h1">ARIEL ARMONI</h1>
+            </a>
+            <div class="sub-logo" style="font-size: 13px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-top: 8px;">Exhibition Architecture</div>
         </header>
 
         <main class="portfolio-grid" id="portfolio-grid">
@@ -43,11 +44,14 @@
     </div>
 
     <script src="sidebar.js"></script>
+
     <script>
         async function loadGrid() {
             const grid = document.getElementById('portfolio-grid');
             try {
+                // שימוש בנתונים שכבר נטענו על ידי sidebar.js - ללא בקשות כפולות
                 const { projects } = await window.portfolioData;
+
                 const fragment = document.createDocumentFragment();
                 projects.forEach(project => {
                     const card = document.createElement('a');
@@ -81,6 +85,7 @@
                 });
 
                 grid.appendChild(fragment);
+
             } catch (err) {
                 console.error('Error loading grid:', err);
             }
