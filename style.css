@@ -257,3 +257,13 @@ body.nav-open .nav-wrapper {
     visibility: hidden;
     pointer-events: none; /* מונע אפשרות ללחוץ על הקישורים כשהם בלתי נראים */
 }
+/* פתרון אבסולוטי להתנגשות בהאדר בזמן סיידבר פתוח */
+.nav-wrapper {
+    transition: opacity 0.4s ease, visibility 0.4s ease !important;
+}
+
+body.nav-open .nav-wrapper {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
