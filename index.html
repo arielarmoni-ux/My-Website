@@ -33,10 +33,13 @@
                     <a href="contact.html" class="nav-label">Contact</a>
                 </div>
             </div>
-            <a href="index.html" class="logo">
-                <h1 class="logo-h1">ARIEL ARMONI</h1>
-            </a>
-            <div class="sub-logo" style="font-size: 13px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-top: 8px;">Exhibition Architecture</div>
+            <!-- עטיפת הלוגו המעודכנת ליציבות ורספונסיביות -->
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <h1 class="logo-h1">ARIEL ARMONI</h1>
+                </a>
+                <div class="sub-logo" style="font-size: 13px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-top: 8px;">Exhibition Architecture</div>
+            </div>
         </header>
 
         <main class="portfolio-grid" id="portfolio-grid">
@@ -49,7 +52,6 @@
         async function loadGrid() {
             const grid = document.getElementById('portfolio-grid');
             try {
-                // שימוש בנתונים שכבר נטענו על ידי sidebar.js - ללא בקשות כפולות
                 const { projects } = await window.portfolioData;
 
                 const fragment = document.createDocumentFragment();
