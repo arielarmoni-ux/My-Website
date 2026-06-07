@@ -54,60 +54,44 @@ body.nav-open #side-nav {
     left: 0; 
 }
 
-/* --- האדר (Header) - מבנה Flexbox גמיש ורספונסיבי --- */
+/* --- האדר (Header) - מעודכן לרספונסיביות מלאה (Scale) --- */
 header { 
     position: relative; 
-    padding: clamp(30px, 3.5vw, 50px) 5% 30px; 
+    padding-top: clamp(40px, 3.5vw, 60px); 
+    padding-bottom: 30px; 
     width: 100%; 
     z-index: 2000; 
-    border-bottom: 1px solid #f0f0f0;
-    
-    /* הפיכת כל ה-header לתיבת Flex אופקית */
-    display: flex;
-    justify-content: space-between; /* דוחף את הניווט לשמאל הקיצוני ואת הלוגו למרכז/ימין */
-    align-items: center;
-    gap: 30px;
-}
-
-/* עטיפת הלוגו והסאב-לוגו כדי שישארו תמיד יחד במרכז ה-Header */
-.logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    /* שומר שהלוגו ישאר תמיד במרכז הכללי של ה-header */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: auto;
 }
 
 .logo { 
     display: block; 
+    text-align: center; 
     font-family: 'Inter', sans-serif; 
     font-weight: 500; 
     text-decoration: none; 
     color: var(--main); 
-    font-size: clamp(22px, 1.8vw, 32px); /* כיוונון עדין של הגודל */
+    font-size: clamp(24px, 1.8vw, 36px); 
     letter-spacing: 0.15em; 
     text-transform: uppercase; 
-    white-space: nowrap; /* מונע מהשם לרדת שורה */
+    transition: font-size 0.2s ease;
 }
 
 header .sub-logo { 
+    text-align: center; 
     font-family: 'Inter', sans-serif; 
     font-weight: 400; 
-    font-size: clamp(9px, 0.6vw, 12px) !important; 
+    font-size: clamp(10px, 0.7vw, 13px) !important; 
     letter-spacing: 0.2em; 
     color: var(--muted); 
     text-transform: uppercase; 
-    margin-top: 6px; 
-    white-space: nowrap;
+    margin-top: 8px; 
+    transition: font-size 0.2s ease;
 }
 
-/* הניווט השמאלי - כבר לא אבסולוטי ושביר */
 .nav-wrapper { 
-    position: relative; 
+    position: absolute; 
+    left: 5%; 
+    top: clamp(42px, 3.6vw, 62px); 
     z-index: 4000; 
     transition: opacity 0.4s ease, visibility 0.4s ease !important;
 }
@@ -121,22 +105,21 @@ body.nav-open .nav-wrapper {
 
 .main-nav-links { 
     display: flex; 
-    gap: clamp(15px, 1.2vw, 30px); 
+    gap: clamp(15px, 1.5vw, 35px); 
     align-items: center; 
 }
 
 .nav-label { 
     font-family: 'Inter', sans-serif; 
     font-weight: 400; 
-    font-size: clamp(11px, 0.75vw, 13px) !important; 
+    font-size: clamp(11px, 0.8vw, 14px) !important; 
     letter-spacing: 2px; 
     text-transform: uppercase; 
     color: var(--main); 
     text-decoration: none; 
     cursor: pointer; 
-    white-space: nowrap; /* מונע מהמילים להתפרק */
+    transition: font-size 0.2s ease;
 }
-
 
 /* --- סיידבר - רשימת פרויקטים --- */
 .project-index-title { 
