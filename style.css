@@ -247,9 +247,10 @@ header {
 }
 
 .gallery img { 
-    width: 80%; 
+    width: 80%;          /* הקטנה ב-20 אחוז מהרוחב המלא */
+    max-width: 1000px;   /* שומר שהתמונות לא יהיו ענקיות במסכים רחבים במיוחד */
     height: auto; 
-    margin-bottom: 40px; 
+    margin: 0 auto 40px; /* ה-auto משמאל ומימין דואג שהתמונה תישאר ממורכזת */
     display: block; 
 }
 
