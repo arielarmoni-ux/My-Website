@@ -58,7 +58,7 @@ body.nav-open #side-nav { left: 0; }
 .nav-wrapper { 
     position: absolute; 
     left: 5%; /* מיושר אוטומטית לקו הגריד בדף הבית */
-    top: 96px; /* יישור אופקי מדויק לאותה השורה של Exhibition Architecture */
+    top: 102px; /* יישור אופקי מדויק לאותה השורה של Exhibition Architecture */
     z-index: 4000; 
     margin: 0;
     padding: 0;
@@ -125,7 +125,7 @@ body:not(:has(.portfolio-grid)) .nav-wrapper {
 /* --- Header & Logo --- */
 header { 
     position: relative; 
-    min-height: 140px; 
+    min-height: 125px; 
     padding: 40px 5% 25px; 
     display: flex; 
     flex-direction: column; 
