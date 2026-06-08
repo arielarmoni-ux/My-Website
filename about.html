@@ -50,13 +50,16 @@
 
     <script src="sidebar.js"></script>
     <script>
-        // תיקון קריטי: הגדרת המשתנה שמונע מהדפדפן לתקוע את טעינת הטקסט
-        const cacheBuster = new Date().getTime();
+        // הגדרה אטומה ומאובטחת של משתנה רענון הזיכרון
+        var cacheBuster = new Date().getTime();
 
         async function loadAboutContent() {
             const container = document.getElementById('about-text-container');
+            if (!container) return;
+            
             try {
-                const res = await fetch(`about_content.txt?v=${cacheBuster}`);
+                // פנייה ישירה לקובץ הטקסט עם חותמת זמן ייחודית כדי לעקוף את ה-Cache של הדפדפן
+                const res = await fetch('about_content.txt?v=' + cacheBuster);
                 if (!res.ok) throw new Error("Could not load about_content.txt");
                 
                 const fullText = await res.text();
@@ -88,7 +91,12 @@
             }
         }
 
-        window.addEventListener('DOMContentLoaded', loadAboutContent);
+        // הפעלה מיידית ובטוחה של הפונקציה
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadAboutContent);
+        } else {
+            loadAboutContent();
+        }
     </script>
 </body>
 </html>
