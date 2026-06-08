@@ -34,7 +34,8 @@
 
         <main class="about-container-fixed">
             <div class="about-text-column" id="about-text-container">
-                </div>
+                <p style="color: #666;">Loading content...</p>
+            </div>
             <div class="about-image-column">
                 <img src="images/profile.jpg" alt="Ariel Armoni">
             </div>
@@ -43,16 +44,20 @@
 
     <script src="sidebar.js"></script>
     <script>
-        // יצירת חותמת זמן ייחודית לרענון קשיח של קובץ הטקסט בכל טעינה
-        var cacheBuster = new Date().getTime();
-
         async function loadAboutContent() {
             const container = document.getElementById('about-text-container');
             if (!container) return;
             
+            // יצירת חותמת זמן ייחודית בכל הרצה כדי לעקוף את ה-Cache של השרת והדפדפן
+            const forceRefreshKey = new Date().getTime();
+            
             try {
-                const res = await fetch('about_content.txt?v=' + cacheBuster);
-                if (!res.ok) throw new Error("Could not load about_content.txt");
+                // קריאת הקובץ עם חותמת זמן ייחודית בכוח
+                const res = await fetch('about_content.txt?v=' + forceRefreshKey);
+                
+                if (!res.ok) {
+                    throw new Error("קובץ הטקסט about_content.txt לא נמצא בשרת או שגיאת טעינה");
+                }
                 
                 const fullText = await res.text();
                 
@@ -63,7 +68,9 @@
                 let htmlContent = "";
 
                 paragraphs.forEach(p => {
-                    if (p.trim()) htmlContent += `<p>${p.trim()}</p>`;
+                    if (p.trim()) {
+                        htmlContent += `<p>${p.trim()}</p>`;
+                    }
                 });
 
                 if (clients.length > 0) {
@@ -79,16 +86,17 @@
                 container.innerHTML = htmlContent;
             } catch (e) {
                 console.error(e);
-                container.innerHTML = "<p style='color:#333 !important;'>Error loading content. Please ensure about_content.txt exists.</p>";
+                container.innerHTML = `
+                    <p style="color: #cc0000 !important; font-weight: 500;">
+                        שגיאה בטעינת התוכן.<br>
+                        אנא ודא שקיים קובץ בשם <strong>about_content.txt</strong> בדיוק באותה תיקייה של דף האודות בשרת.
+                    </p>`;
             }
         }
 
-        // הפעלה כפולה ומאובטחת שמבטיחה ריצה רק כשהדף מלא ומוכן
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadAboutContent);
-        } else {
-            loadAboutContent();
-        }
+        // הפעלה מיידית של הפונקציה ב-3 שכבות הגנה שונות כדי להבטיח ריצה בכל מצב
+        loadAboutContent();
+        document.addEventListener('DOMContentLoaded', loadAboutContent);
         window.onload = loadAboutContent;
     </script>
 </body>
