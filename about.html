@@ -17,6 +17,13 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>A</text></svg>">
     
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* חוק קטן שמבטיח שבמובייל התמונה תעלה לראש העמוד לפני הטקסט */
+        @media (max-width: 1024px) {
+            .about-image-container { order: -1; }
+        }
+    </style>
 </head>
 <body>
    <div id="site-wrapper">
@@ -43,8 +50,8 @@
 
     <script src="sidebar.js"></script>
     <script>
-        // יצירת קאש-באסטר דינמי במידה ולא הוגדר קודם
-        const cacheBuster = typeof cacheBuster !== 'undefined' ? cacheBuster : new Date().getTime();
+        // תיקון קריטי: הגדרת המשתנה שמונע מהדפדפן לתקוע את טעינת הטקסט
+        const cacheBuster = new Date().getTime();
 
         async function loadAboutContent() {
             const container = document.getElementById('about-text-container');
