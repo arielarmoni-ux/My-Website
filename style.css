@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v6 - Final Production with Mobile Project Names & About Image Fix) */
+/* style.css - Full Premium Aligned Portfolio Layout (v7 - Definitive Production Version) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -342,66 +342,87 @@ header + main > div:first-child {
     margin-bottom: 60px !important;
 }
 
-/* --- דף אודות (About Page) --- */
-.about-content {
+/* --- דף אודות (About Page) - סינכרון ונעילת פלקסבוקס חסינת תקלות --- */
+.about-container-fixed {
     width: 80vw !important;
     max-width: 1100px !important;
-    margin: 0 auto;
-    padding: 60px 0 100px !important; 
-    display: grid; 
-    grid-template-columns: 1.2fr 0.8fr; /* יחס אלגנטי לטובת הטקסט */
-    gap: 80px; 
-    align-items: start; 
-    direction: ltr;
+    margin: 0 auto !important;
+    padding: 60px 0 100px 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: start !important;
+    direction: ltr !important;
+    box-sizing: border-box !important;
 }
 
-.about-text p { 
-    font-size: 15px; 
-    line-height: 1.7; 
-    margin-bottom: 30px; 
-    color: #333; 
+.about-text-column {
+    width: 55% !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-/* קופסה עוטפת ותיקון התמונה בדסקטופ */
-.about-image-container {
-    width: 100%;
-    display: block;
+/* נעילת צבע וראות לפסקאות האודות הדינמיות */
+.about-text-column p {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    margin-bottom: 25px !important;
+    color: #333333 !important; /* אפור כהה קבוע - מונע היעלמות */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-.about-image-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    background: #f7f7f7;
+.about-image-column {
+    width: 38% !important;
+    box-sizing: border-box !important;
 }
 
-/* רשימת לקוחות נבחרים (Selected Clients) */
-.clients-section { margin-top: 40px; }
+.about-image-column img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: cover !important;
+}
+
+/* אזור הלקוחות והמוזיאונים באודות */
+.clients-section { 
+    margin-top: 40px !important; 
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 .clients-section h3 { 
-    font-size: 11px; 
-    text-transform: uppercase; 
-    letter-spacing: 2px; 
-    color: var(--muted); 
-    margin-bottom: 25px; 
-    font-weight: 500;
+    font-size: 11px !important; 
+    text-transform: uppercase !important; 
+    letter-spacing: 2px !important; 
+    color: #888888 !important; 
+    margin-bottom: 25px !important; 
+    font-weight: 500 !important;
+    text-align: left !important;
 }
 
 .clients-list { 
-    list-style: none; 
-    padding: 0; 
-    margin: 0;
-    display: flex; 
-    flex-direction: column; 
-    gap: 14px; 
+    list-style: none !important; 
+    padding: 0 !important; 
+    margin: 0 !important;
+    display: flex !important; 
+    flex-direction: column !important; 
+    gap: 14px !important; 
 }
 
 .clients-list li { 
-    font-size: 13px; 
-    color: #444; 
-    border-bottom: none !important; 
-    padding-bottom: 0 !important; 
-    max-width: 100%; 
+    font-size: 13px !important; 
+    color: #444444 !important; 
+    text-align: left !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    max-width: 100% !important;
+    display: list-item !important;
 }
 
 /* --- דף קשר (Contact Page) --- */
@@ -417,7 +438,6 @@ header + main > div:first-child {
 /* --- מובייל והתאמות רספונסיביות - נעילת מירכוז מוחלטת והצגת שמות פרויקטים --- */
 @media (max-width: 1024px) {
     .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
-    .about-content { grid-template-columns: 1fr; gap: 40px; }
 }
 
 @media (max-width: 768px) {
@@ -430,7 +450,7 @@ header + main > div:first-child {
         align-items: center !important; 
     }
     
-    /* מירכוז אטומה לכל דפי האתר במובייל */
+    /* מירכוז אטום ואחיד לכל דפי האתר במובייל (כולל מניעת תזוזות בדפים פנימיים) */
     .nav-wrapper,
     body .nav-wrapper,
     body:not(:has(.portfolio-grid)) .nav-wrapper { 
@@ -466,12 +486,27 @@ header + main > div:first-child {
         opacity: 0 !important; 
     }
     
+    /* התאמת מבנה עמוד האודות למובייל (תמונה עולה למעלה, טקסט יורד) */
+    .about-container-fixed {
+        flex-direction: column !important;
+        width: 90vw !important;
+        padding-top: 40px !important;
+    }
+    .about-text-column {
+        width: 100% !important;
+        order: 2 !important;
+    }
+    .about-image-column {
+        width: 100% !important;
+        margin-bottom: 35px !important;
+        order: 1 !important;
+    }
+    
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     body.nav-open #site-wrapper { transform: translateX(var(--nav-width)); margin-left: 0; width: 100%; }
     
     .gallery img,
     header + main > div:first-child,
-    .about-content,
     .contact-content {
         width: 100% !important;
         max-width: 100% !important;
