@@ -6,7 +6,6 @@
     <title>About | Ariel Armoni</title>
     <meta name="description" content="Ariel Armoni - architect and exhibition designer specializing in art installations, children's exhibitions, and interactive exhibits.">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Ariel Armoni | Exhibition Architecture">
     <meta property="og:title" content="About | Ariel Armoni">
@@ -16,32 +15,8 @@
 
     <link rel="canonical" href="https://arielarmoni.com/about.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>A</text></svg>">
+    
     <link rel="stylesheet" href="style.css">
-    <style>
-        .about-content { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 80px 5% 100px; 
-            display: grid; 
-            grid-template-columns: 1.1fr 1fr; 
-            gap: 80px; 
-            align-items: start; 
-            direction: ltr;
-        }
-        .about-image img { width: 90%; height: auto; display: block; }
-        .about-text { text-align: left; direction: ltr; }
-        .about-text p { font-size: 17px; line-height: 1.65; margin-bottom: 25px; color: var(--main); }
-        .clients-section { margin-top: 50px; }
-        .clients-section h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 20px; }
-        .clients-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-        .clients-list li { font-size: 14px; color: var(--main); border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; max-width: 300px; }
-        
-        @media (max-width: 900px) {
-            .about-content { grid-template-columns: 1fr; gap: 40px; }
-            .about-image { order: -1; }
-            .clients-list li { max-width: 100%; }
-        }
-    </style>
 </head>
 <body>
    <div id="site-wrapper">
@@ -54,13 +29,13 @@
                 </div>
             </div>
             <a href="index.html" class="logo">ARIEL ARMONI</a>
-            <div class="sub-logo" style="font-size: 13px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-top: 8px;">Exhibition Architecture</div>
+            <div class="sub-logo">Exhibition Architecture</div>
         </header>
 
         <main class="about-content">
             <div class="about-text" id="about-text-container">
                 </div>
-            <div class="about-image">
+            <div class="about-image-container">
                 <img src="images/profile.jpg" alt="Ariel Armoni">
             </div>
         </main>
@@ -68,6 +43,9 @@
 
     <script src="sidebar.js"></script>
     <script>
+        // יצירת קאש-באסטר דינמי במידה ולא הוגדר קודם
+        const cacheBuster = typeof cacheBuster !== 'undefined' ? cacheBuster : new Date().getTime();
+
         async function loadAboutContent() {
             const container = document.getElementById('about-text-container');
             try {
