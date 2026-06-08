@@ -201,20 +201,31 @@ header {
     font-weight: 500; 
 }
 
-/* --- חצים --- */
+/* --- חצי ניווט פנימיים - מוצמדים דינמית לצדי התמונה --- */
 .nav-arrow { 
     position: fixed; 
     top: 50%; 
     transform: translateY(-50%); 
-    z-index: 2500; 
-    text-decoration: none; 
+    font-size: clamp(24px, 2.5vw, 40px); /* גודל החץ ישתנה בהתאמה לגודל המסך */
     color: var(--main); 
-    font-size: 30px; 
-    opacity: 0.2; 
-    padding: 20px; 
+    text-decoration: none; 
+    z-index: 2500; 
+    opacity: 0.3; 
+    padding: 15px;
     transition: all 0.3s ease; 
 }
 
+/* חץ שמאלי - מוצמד לקצה השמאלי של התמונה (שמתחילה ב-10% מהמסך) */
+#prev-project {
+    left: calc(10% - 50px); 
+}
+
+/* חץ ימני - מוצמד לקצה הימני של התמונה (שמסתיימת ב-90% מהמסך) */
+#next-project {
+    right: calc(10% - 50px); 
+}
+
+/* אפקט הובר נקי */
 .nav-arrow:hover { 
     opacity: 1; 
     color: var(--muted); 
