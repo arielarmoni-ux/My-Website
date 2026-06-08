@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v4 - Ultimate Production with Fixed Mobile Centering) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Absolute Mobile Fix) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -57,8 +57,8 @@ body.nav-open #side-nav { left: 0; }
 /* --- ניווט טקסטואלי עליון - טיפוגרפיה מעודנת ומיקום מושלם בדסקטופ --- */
 .nav-wrapper { 
     position: absolute; 
-    left: 5%; /* מיושר אנכית לקו הגריד בדף הבית */
-    top: 102px; /* מורד ל-102px בהתאמה מושלמת למבנה ההאדר החדש */
+    left: 5%; 
+    top: 102px; 
     z-index: 4000; 
     margin: 0;
     padding: 0;
@@ -74,7 +74,7 @@ body.nav-open #side-nav { left: 0; }
 }
 
 .nav-label { 
-    font-size: 11px; /* מוקטן ומעודן למראה גלריי בינלאומי */
+    font-size: 11px; 
     text-transform: uppercase; 
     letter-spacing: 2px; 
     text-decoration: none; 
@@ -95,7 +95,7 @@ body.nav-open .nav-wrapper {
     pointer-events: none !important;
 }
 
-/* --- התאמת הניווט העליון לדפים פנימיים בדסקטופ (כדי שיינעל על קו ה-80vw של התמונות והתוכן) --- */
+/* --- התאמת הניווט העליון לדפים פנימיים בדסקטופ --- */
 body:not(:has(.portfolio-grid)) .nav-wrapper {
     left: calc(50% - 40vw) !important;
 }
@@ -130,11 +130,11 @@ body:not(:has(.portfolio-grid)) .nav-wrapper {
 
 .project-list-nav a:hover { color: var(--muted); transform: translateX(8px); }
 
-/* --- Header & Logo - קו תחתון הועלה למעלה במיקום מהודק ויוקרתי --- */
+/* --- Header & Logo --- */
 header { 
     position: relative; 
-    min-height: 125px; /* צומצם מ-140px להעלאת הקו */
-    padding: 40px 5% 15px; /* פדינג תחתון צומצם מ-25px ל-15px לקירוב הקו למעלה */
+    min-height: 125px; 
+    padding: 40px 5% 15px; 
     display: flex; 
     flex-direction: column; 
     justify-content: center; 
@@ -262,7 +262,7 @@ header {
     transform: translateY(-50%) scale(1.1); 
 }
 
-/* --- דף פרויקט פנימי - יישור מושלם לקו התמונה משמאל וריווחים מוקפדים --- */
+/* --- דף פרויקט פנימי --- */
 header + main > div:first-child {
     width: 80vw !important; 
     max-width: 1100px !important; 
@@ -272,8 +272,6 @@ header + main > div:first-child {
     padding-right: 0 !important;
     text-align: left !important; 
     box-sizing: border-box !important;
-    
-    /* מרווח עליון מתחת לקו ההאדר הציבורי */
     padding-top: 60px !important;
 }
 
@@ -286,8 +284,6 @@ header + main > div:first-child {
     letter-spacing: 4px;
     text-transform: uppercase;
     font-weight: 400;
-    
-    /* מרווח תחתון עד תחילת הנתונים */
     margin-bottom: 20px !important;
 }
 
@@ -297,11 +293,9 @@ header + main > div:first-child {
     padding: 0 !important; 
     display: flex !important; 
     flex-direction: column !important; 
-    gap: 6px !important; /* מרווח קבוע ואחיד בין שורה לשורה במטא */
+    gap: 6px !important; 
     direction: ltr !important; 
     text-align: left !important; 
-    
-    /* מרווח תחתון עד לתחילת פסקת התיאור */
     margin: 0 0 30px 0 !important;
 }
 
@@ -318,8 +312,6 @@ header + main > div:first-child {
     text-align: left !important; 
     direction: ltr !important; 
     white-space: pre-wrap !important; 
-    
-    /* מרווח נשימה מכובד ומחושב בין סוף פסקת התיאור לתמונה הראשונה בגלריה */
     margin-top: 0 !important;
     margin-bottom: 70px !important; 
 }
@@ -342,13 +334,10 @@ header + main > div:first-child {
     max-width: 1100px; 
     height: auto; 
     display: block; 
-    
-    /* המרווח האנכי הקבוע, הנקי והעקבי בין תמונה לתמונה */
     margin-top: 0 !important;
     margin-bottom: 35px !important; 
 }
 
-/* ביטול המרווח הכפול בתחתית המסך לתמונה האחרונה */
 .gallery img:last-child {
     margin-bottom: 60px !important;
 }
@@ -358,7 +347,7 @@ header + main > div:first-child {
     width: 80vw !important;
     max-width: 1100px !important;
     margin: 0 auto;
-    padding: 60px 0 100px !important; /* תואם בדיוק ליישור הגובה האנכי של דפי הפרויקט */
+    padding: 60px 0 100px !important; 
     display: grid; 
     grid-template-columns: 1.1fr 1fr; 
     gap: 80px; 
@@ -373,11 +362,7 @@ header + main > div:first-child {
     color: #333; 
 }
 
-/* רשימת לקוחות נבחרים (Selected Clients) */
-.clients-section {
-    margin-top: 40px;
-}
-
+.clients-section { margin-top: 40px; }
 .clients-section h3 { 
     font-size: 11px; 
     text-transform: uppercase; 
@@ -399,7 +384,7 @@ header + main > div:first-child {
 .clients-list li { 
     font-size: 13px; 
     color: #444; 
-    border-bottom: none !important; /* הסרת קווים תחתוניים למראה נקי של גלריה */
+    border-bottom: none !important; 
     padding-bottom: 0 !important; 
     max-width: 100%; 
 }
@@ -414,29 +399,45 @@ header + main > div:first-child {
     direction: ltr;
 }
 
-/* --- מובייל והתאמות רספונסיביות - נעילת מירכוז יציבה לחלוטין --- */
+/* --- מובייל והתאמות רספונסיביות - נעילת מירכוז מוחלטת ואטומה לשינויי דפים --- */
 @media (max-width: 1024px) {
     .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
     .about-content { grid-template-columns: 1fr; gap: 40px; }
 }
 
 @media (max-width: 768px) {
-    header { padding-top: 30px; min-height: auto; align-items: center; }
+    header { 
+        padding-top: 30px !important; 
+        min-height: auto !important; 
+        padding-bottom: 15px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; 
+    }
     
-    /* מירכוז הנדסי מוחלט של הניווט במובייל בכל דפי האתר (ראשי, פרויקטים, אודות, קשר) */
-    .nav-wrapper { 
+    /* פתרון שורש הבעיה: כפיית איפוס מוחלטת שדורסת את חוקי ה-not(:has) של הדפים הפנימיים במובייל */
+    .nav-wrapper,
+    body .nav-wrapper,
+    body:not(:has(.portfolio-grid)) .nav-wrapper { 
         position: relative !important; 
         left: auto !important; 
         right: auto !important;
         top: auto !important; 
-        margin: 0 auto 25px auto !important; /* חלוקת שוליים אוטומטית למרכז מושלם */
+        margin: 15px auto 20px auto !important; 
         width: 100% !important; 
+        max-width: 100% !important;
         display: flex !important; 
-        justify-content: center !important; /* יישור פנימי לאמצע */
+        justify-content: center !important; 
+        align-items: center !important;
+        transform: none !important;
     }
     
     .main-nav-links { 
-        gap: 20px; /* התאמה עדינה למסכי מובייל צרים */
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 20px !important; 
+        width: auto !important;
     }
     
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
