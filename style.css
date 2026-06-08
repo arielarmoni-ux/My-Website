@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v10 - Custom About Layout with Right-Aligned Clients & Justified Text) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Absolute Mobile Fix) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -54,7 +54,7 @@ body.nav-open #site-wrapper {
 
 body.nav-open #side-nav { left: 0; }
 
-/* --- ניווט טקסטואלי עליון - דסקטופ --- */
+/* --- ניווט טקסטואלי עליון - טיפוגרפיה מעודנת ומיקום מושלם בדסקטופ --- */
 .nav-wrapper { 
     position: absolute; 
     left: 5%; 
@@ -88,12 +88,14 @@ body.nav-open #side-nav { left: 0; }
 
 .nav-label:hover { color: var(--muted); }
 
+/* --- הסתרת הניווט העליון באופן גלובלי בכל דפי האתר כאשר הסיידבר פתוח --- */
 body.nav-open .nav-wrapper {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
 }
 
+/* --- התאמת הניווט העליון לדפים פנימיים בדסקטופ --- */
 body:not(:has(.portfolio-grid)) .nav-wrapper {
     left: calc(50% - 40vw) !important;
 }
@@ -314,6 +316,9 @@ header + main > div:first-child {
     margin-bottom: 70px !important; 
 }
 
+.project-description a { color: inherit; text-decoration: none; transition: all 0.3s ease; border-bottom: 1px solid transparent; }
+.project-description a:hover { color: var(--muted); border-bottom: 1px solid var(--muted); }
+
 /* --- גלריית תמונות פרויקט --- */
 .gallery { 
     max-width: 100%; 
@@ -333,108 +338,57 @@ header + main > div:first-child {
     margin-bottom: 35px !important; 
 }
 
-.gallery img:last-child { margin-bottom: 60px !important; }
-/* --- דף אודות (About Page) - קומפוזיציה אסימטרית סופית --- */
+.gallery img:last-child {
+    margin-bottom: 60px !important;
+}
+
+/* --- דף אודות (About Page) --- */
 .about-content {
     width: 80vw !important;
     max-width: 1100px !important;
-    margin: 0 auto !important;
+    margin: 0 auto;
     padding: 60px 0 100px !important; 
-    display: grid !important; 
-    /* חלוקה מדויקת המגדילה את התמונה ב-30% ושומרת על פרופורציה מעודנת */
-    grid-template-columns: 1.12fr 0.88fr !important;
-    gap: 80px !important; 
-    align-items: start !important; 
-    direction: ltr !important;
-}
-
-/* טור שמאל: טקסט מיושר כבלוק */
-.about-text { 
-    text-align: justify !important; 
-    text-align-last: left !important; /* מונע מתיחה מכוערת של השורה האחרונה בפסקה */
-    direction: ltr !important;
-    display: block !important;
+    display: grid; 
+    grid-template-columns: 1.1fr 1fr; 
+    gap: 80px; 
+    align-items: start; 
+    direction: ltr;
 }
 
 .about-text p { 
-    font-size: 15px !important; 
-    line-height: 1.7 !important; 
-    margin-bottom: 30px !important; 
-    color: #333 !important; 
-    text-align: justify !important;
-    text-align-last: left !important;
+    font-size: 15px; 
+    line-height: 1.7; 
+    margin-bottom: 30px; 
+    color: #333; 
 }
 
-/* טור ימין: מחזיק את התמונה והלקוחות יחד */
-.about-right-column {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 45px !important; /* מרחק אלגנטי בין תחתית התמונה לראש רשימת הלקוחות */
-    width: 100% !important;
-}
-
-.about-image {
-    width: 100% !important;
-    display: block !important;
-}
-
-.about-image img {
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    object-fit: cover !important;
-}
-
-/* רשימת לקוחות בטור הימני */
-.clients-section { 
-    text-align: left !important;
-    display: block !important;
-}
-
+.clients-section { margin-top: 40px; }
 .clients-section h3 { 
-    font-size: 11px !important; 
-    text-transform: uppercase !important; 
-    letter-spacing: 2px !important; 
-    color: #888 !important; 
-    margin-bottom: 25px !important; 
-    font-weight: 500 !important;
+    font-size: 11px; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    color: var(--muted); 
+    margin-bottom: 25px; 
+    font-weight: 500;
 }
 
 .clients-list { 
-    list-style: none !important; 
-    padding: 0 !important; 
-    margin: 0 !important;
-    display: flex !important; 
-    flex-direction: column !important; 
-    gap: 14px !important; 
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+    display: flex; 
+    flex-direction: column; 
+    gap: 14px; 
 }
 
 .clients-list li { 
-    font-size: 13px !important; 
-    color: #444 !important; 
-    text-align: left !important;
+    font-size: 13px; 
+    color: #444; 
+    border-bottom: none !important; 
+    padding-bottom: 0 !important; 
+    max-width: 100%; 
 }
 
-/* --- התאמות מובייל רספונסיביות למבנה החדש --- */
-@media (max-width: 1024px) {
-    .about-content { grid-template-columns: 1fr !important; gap: 40px !important; }
-}
-
-@media (max-width: 768px) {
-    .about-content {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding-left: 5% !important;
-        padding-right: 5% !important;
-        display: flex !important;
-        flex-direction: column !important; /* מסדר אותם אנכית במובייל */
-    }
-
-    /* סדר מובייל: תמונה ראשונה, טקסט שני, לקוחות בסוף */
-    .about-right-column { order: 1 !important; gap: 35px !important; }
-    .about-text { order: 2 !important; margin-top: 35px !important; }
-    .clients-section { order: 3 !important; }
-}
 /* --- דף קשר (Contact Page) --- */
 .contact-content {
     width: 80vw !important;
@@ -445,11 +399,10 @@ header + main > div:first-child {
     direction: ltr;
 }
 
-/* --- מובייל והתאמות רספונסיביות --- */
+/* --- מובייל והתאמות רספונסיביות - נעילת מירכוז מוחלטת ואטומה לשינויי דפים --- */
 @media (max-width: 1024px) {
     .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
-    .about-content { grid-template-columns: 1fr !important; gap: 40px !important; }
-    .about-text, .about-image, .clients-section { grid-column: auto !important; }
+    .about-content { grid-template-columns: 1fr; gap: 40px; }
 }
 
 @media (max-width: 768px) {
@@ -462,6 +415,7 @@ header + main > div:first-child {
         align-items: center !important; 
     }
     
+    /* פתרון שורש הבעיה: כפיית איפוס מוחלטת שדורסת את חוקי ה-not(:has) של הדפים הפנימיים במובייל */
     .nav-wrapper,
     body .nav-wrapper,
     body:not(:has(.portfolio-grid)) .nav-wrapper { 
@@ -483,15 +437,8 @@ header + main > div:first-child {
         justify-content: center !important;
         align-items: center !important;
         gap: 20px !important; 
+        width: auto !important;
     }
-    
-    .project-info { opacity: 1 !important; padding: 10px 0 20px 0 !important; }
-    .project-card:hover .img-container::after { opacity: 0 !important; }
-    
-    /* סדר נכון למובייל: תמונה בראש, מתחתיה טקסט, ובסוף הלקוחות */
-    .about-image { order: 1 !important; margin-bottom: 35px !important; }
-    .about-text { order: 2 !important; }
-    .clients-section { order: 3 !important; margin-top: 40px !important; }
     
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     body.nav-open #site-wrapper { transform: translateX(var(--nav-width)); margin-left: 0; width: 100%; }
