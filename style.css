@@ -244,13 +244,17 @@ header {
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 0 5%; 
+    /* שימוש ב-flex כדי לוודא שכל התוכן בפנים תמיד ממורכז אופקית */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .gallery img { 
     width: 80%;          /* הקטנה ב-20 אחוז מהרוחב המלא */
-    max-width: 1000px;   /* שומר שהתמונות לא יהיו ענקיות במסכים רחבים במיוחד */
+    max-width: 1000px;   /* מונע מהתמונות לגדול מדי במסכי ענק */
     height: auto; 
-    margin: 0 auto 40px; /* ה-auto משמאל ומימין דואג שהתמונה תישאר ממורכזת */
+    margin-bottom: 40px; 
     display: block; 
 }
 
