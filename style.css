@@ -53,32 +53,33 @@ body.nav-open #site-wrapper {
 }
 
 body.nav-open #side-nav { left: 0; }
-/* --- ניווט טקסטואלי עליון - מתואם לשורת התיאור התחתונה --- */
+/* --- ניווט טקסטואלי עליון - יישור קו אופקי ואנכי מושלם --- */
 .nav-wrapper { 
     position: absolute; 
+    /* שימוש ב-5% בדיוק כמו ה-padding של הגריד כדי להבטיח יישור אנכי מושלם לקו התמונות */
     left: 5%; 
-    /* הסטה למטה כדי להתיישב בדיוק על אותו קו גובה (Baseline) של ה-sub-logo */
-    top: 93px; 
+    /* הסטה מדויקת למטה כדי לשבת על אותו קו גובה (Baseline) של ה-sub-logo */
+    top: 96px; 
     z-index: 4000; 
     margin: 0;
     padding: 0;
-    line-height: 1; /* מאפס גבהים מיותרים מסביב לטקסט */
+    line-height: 1;
 }
 
 .main-nav-links { 
     display: flex; 
     align-items: center; 
-    gap: 20px; /* מרווח מעודן בין הקישורים */
+    gap: 30px; 
     direction: ltr; 
 }
 
 .nav-label { 
-    font-size: 13px; /* גודל זהה לחלוטין לזה של ה-sub-logo שלך */
+    font-size: 13px; /* גודל זהה לחלוטין ל-sub-logo */
     text-transform: uppercase; 
-    letter-spacing: 2px; /* תואם בדיוק ל-letter-spacing של ה-sub-logo */
+    letter-spacing: 2px; /* ריווח אותיות זהה לחלוטין ל-sub-logo */
     text-decoration: none; 
     color: var(--main); 
-    font-weight: 400; /* משקל קל ונקי שתואם לשורת התיאור */
+    font-weight: 400; /* משקל גופן זהה */
     transition: 0.3s; 
     cursor: pointer; 
     line-height: 1;
@@ -86,6 +87,18 @@ body.nav-open #side-nav { left: 0; }
 }
 
 .nav-label:hover { color: var(--muted); }
+
+/* --- התאמת גובה ה-Header למניעת מתיחה מיותרת --- */
+header { 
+    position: relative; 
+    min-height: 140px; /* נותן מרחב נשימה קבוע לכל רכיבי ההאדר */
+    padding: 40px 5% 25px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    border-bottom: 1px solid #f0f0f0; 
+}
 
 /* --- הגדרות סיידבר --- */
 .project-index-title { 
