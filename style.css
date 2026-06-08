@@ -54,23 +54,25 @@ body.nav-open #site-wrapper {
 
 body.nav-open #side-nav { left: 0; }
 
-/* --- ניווט טקסטואלי עליון --- */
+/* --- ניווט טקסטואלי עליון - מוקטן ב-20% ומיושר לשורת התיאור התחתונה --- */
 .nav-wrapper { 
     position: absolute; 
     left: 5%; 
-    top: 52px; 
+    /* הסטה למטה (מ-52px ל-92px) כדי להתיישב בדיוק מול ה-sub-logo התחתון */
+    top: 92px; 
     z-index: 4000; 
 }
 
 .main-nav-links { 
     display: flex; 
     align-items: center; 
-    gap: 30px; 
+    gap: 24px; /* צמצום המרווח ביניהם ב-20% כדי לשמור על פרופורציה */
     direction: ltr; 
 }
 
 .nav-label { 
-    font-size: 13px; 
+    /* הקטנה ב-20% (מ-13px ל-10.5px) */
+    font-size: 10.5px; 
     text-transform: uppercase; 
     letter-spacing: 1.5px; 
     text-decoration: none; 
