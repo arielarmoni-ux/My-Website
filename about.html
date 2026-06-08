@@ -19,9 +19,63 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* חוק קטן שמבטיח שבמובייל התמונה תעלה לראש העמוד לפני הטקסט */
-        @media (max-width: 1024px) {
-            .about-image-container { order: -1; }
+        .about-container-fixed {
+            width: 80vw !important;
+            max-width: 1100px !important;
+            margin: 0 auto !important;
+            padding: 60px 0 100px 0 !important;
+            display: flex !important;
+            flex-direction: row !important; /* דסקטופ: טורים זה לצד זה */
+            justify-content: space-between !important;
+            align-items: start !important;
+            direction: ltr !important; /* הצמדת תוכן לשמאל כמקובל */
+            box-sizing: border-box !important;
+        }
+
+        .about-text-column {
+            width: 55% !important; /* הטור השמאלי של הטקסט */
+            text-align: left !important;
+            box-sizing: border-box !important;
+        }
+
+        .about-text-column p {
+            font-size: 15px !important;
+            line-height: 1.7 !important;
+            margin-bottom: 25px !important;
+            color: #333333 !important; /* אפור כהה קריא מאוד */
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .about-image-column {
+            width: 38% !important; /* הטור הימני של התמונה */
+            box-sizing: border-box !important;
+        }
+
+        .about-image-column img {
+            width: 100% !important;
+            height: auto !important;
+            display: block !important;
+            object-fit: cover !important;
+        }
+
+        /* התאמה מלאה למובייל וטאבלטים */
+        @media (max-width: 900px) {
+            .about-container-fixed {
+                flex-direction: column !important; /* מובייל: טור אחד אנכי */
+                width: 90vw !important;
+                padding-top: 40px !important;
+            }
+            .about-text-column {
+                width: 100% !important;
+                order: 2 !important; /* הטקסט ירד למטה */
+            }
+            .about-image-column {
+                width: 100% !important;
+                margin-bottom: 35px !important;
+                order: 1 !important; /* התמונה תעלה לראש העמוד */
+            }
         }
     </style>
 </head>
@@ -39,10 +93,10 @@
             <div class="sub-logo">Exhibition Architecture</div>
         </header>
 
-        <main class="about-content">
-            <div class="about-text" id="about-text-container">
+        <main class="about-container-fixed">
+            <div class="about-text-column" id="about-text-container">
                 </div>
-            <div class="about-image-container">
+            <div class="about-image-column">
                 <img src="images/profile.jpg" alt="Ariel Armoni">
             </div>
         </main>
@@ -50,7 +104,7 @@
 
     <script src="sidebar.js"></script>
     <script>
-        // הגדרה אטומה ומאובטחת של משתנה רענון הזיכרון
+        // יצירת חותמת זמן ייחודית לרענון קשיח של קובץ הטקסט
         var cacheBuster = new Date().getTime();
 
         async function loadAboutContent() {
@@ -58,7 +112,6 @@
             if (!container) return;
             
             try {
-                // פנייה ישירה לקובץ הטקסט עם חותמת זמן ייחודית כדי לעקוף את ה-Cache של הדפדפן
                 const res = await fetch('about_content.txt?v=' + cacheBuster);
                 if (!res.ok) throw new Error("Could not load about_content.txt");
                 
@@ -91,7 +144,7 @@
             }
         }
 
-        // הפעלה מיידית ובטוחה של הפונקציה
+        // טעינה מאובטחת ללא קשר למצב הדף
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadAboutContent);
         } else {
