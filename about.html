@@ -17,108 +17,6 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>A</text></svg>">
     
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        .about-container-fixed {
-            width: 80vw !important;
-            max-width: 1100px !important;
-            margin: 0 auto !important;
-            padding: 60px 0 100px 0 !important;
-            display: flex !important;
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            align-items: start !important;
-            direction: ltr !important;
-            box-sizing: border-box !important;
-        }
-
-        .about-text-column {
-            width: 55% !important;
-            text-align: left !important;
-            box-sizing: border-box !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        /* נעילת צבע וראות לפסקאות האודות */
-        .about-text-column p {
-            font-size: 15px !important;
-            line-height: 1.7 !important;
-            margin-bottom: 25px !important;
-            color: #333333 !important; /* אפור כהה עמוק וקבוע */
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        .about-image-column {
-            width: 38% !important;
-            box-sizing: border-box !important;
-        }
-
-        .about-image-column img {
-            width: 100% !important;
-            height: auto !important;
-            display: block !important;
-            object-fit: cover !important;
-        }
-
-        /* נעילת צבע וראות לאזור הלקוחות הנבחרים */
-        .clients-section { 
-            margin-top: 40px !important; 
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        
-        .clients-section h3 { 
-            font-size: 11px !important; 
-            text-transform: uppercase !important; 
-            letter-spacing: 2px !important; 
-            color: #888888 !important; /* צבע טקסט קבוע לכותרת */
-            margin-bottom: 25px !important; 
-            font-weight: 500 !important;
-            text-align: left !important;
-        }
-
-        .clients-list { 
-            list-style: none !important; 
-            padding: 0 !important; 
-            margin: 0 !important;
-            display: flex !important; 
-            flex-direction: column !important; 
-            gap: 14px !important; 
-        }
-
-        .clients-list li { 
-            font-size: 13px !important; 
-            color: #444444 !important; /* צבע טקסט קבוע לרשימת המוזיאונים */
-            text-align: left !important;
-            border-bottom: none !important;
-            padding-bottom: 0 !important;
-            max-width: 100% !important;
-            display: list-item !important;
-        }
-
-        /* התאמה מלאה למובייל וטאבלטים */
-        @media (max-width: 900px) {
-            .about-container-fixed {
-                flex-direction: column !important;
-                width: 90vw !important;
-                padding-top: 40px !important;
-            }
-            .about-text-column {
-                width: 100% !important;
-                order: 2 !important;
-            }
-            .about-image-column {
-                width: 100% !important;
-                margin-bottom: 35px !important;
-                order: 1 !important;
-            }
-        }
-    </style>
 </head>
 <body>
    <div id="site-wrapper">
@@ -145,7 +43,7 @@
 
     <script src="sidebar.js"></script>
     <script>
-        // יצירת חותמת זמן ייחודית לרענון קשיח של קובץ הטקסט
+        // יצירת חותמת זמן ייחודית לרענון קשיח של קובץ הטקסט בכל טעינה
         var cacheBuster = new Date().getTime();
 
         async function loadAboutContent() {
@@ -185,12 +83,13 @@
             }
         }
 
-        // טעינה מאובטחת ללא קשר למצב הדף
+        // הפעלה כפולה ומאובטחת שמבטיחה ריצה רק כשהדף מלא ומוכן
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadAboutContent);
         } else {
             loadAboutContent();
         }
+        window.onload = loadAboutContent;
     </script>
 </body>
 </html>
