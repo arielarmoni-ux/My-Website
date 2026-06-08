@@ -341,15 +341,14 @@ header + main > div:first-child {
 .gallery img:last-child {
     margin-bottom: 60px !important;
 }
-
-/* --- דף אודות (About Page) - מידות מדויקות ויחס 30% מעודן לתמונה --- */
+/* --- דף אודות (About Page) - דריסה סופית וחסינת חסימות שרת --- */
 .about-content {
     width: 80vw !important;
     max-width: 1100px !important;
     margin: 0 auto !important;
     padding: 60px 0 100px !important; 
     display: grid !important; 
-    /* יחס פרופורציונלי מדויק המגדיל את התמונה ב-30% בעדינות ושומר על איזון מגזיני קלאסי */
+    /* נעילת הגדלה מדויקת של 30% לתמונה (1.12 לטקסט ו-0.88 לתמונה) */
     grid-template-columns: 1.12fr 0.88fr !important;
     gap: 80px !important; 
     align-items: start !important; 
@@ -358,7 +357,7 @@ header + main > div:first-child {
 
 .about-text { 
     text-align: justify !important; /* יישור בלוק יוקרתי */
-    text-align-last: left !important; /* דואג שהשורה האחרונה של הפסקה לא תימתח בכוח */
+    text-align-last: left !important; /* הגנה מפני מתיחת השורה האחרונה בפסקה */
     direction: ltr !important;
     display: block !important;
 }
@@ -368,7 +367,7 @@ header + main > div:first-child {
     line-height: 1.7 !important; 
     margin-bottom: 30px !important; 
     color: #333 !important; 
-    text-align: justify !important;
+    text-align: justify !important; /* יישור בלוק קשיח לפסקאות התוכן */
     text-align-last: left !important;
 }
 
@@ -384,7 +383,7 @@ header + main > div:first-child {
     object-fit: cover !important;
 }
 
-/* רשימת לקוחות נבחרים (Selected Clients) */
+/* הגנה על רשימת הלקוחות הנבחרים שלא תושפע מהבלוק */
 .clients-section { 
     margin-top: 40px !important; 
     text-align: left !important;
@@ -417,7 +416,6 @@ header + main > div:first-child {
     max-width: 100% !important;
     text-align: left !important;
 }
-
 /* --- דף קשר (Contact Page) --- */
 .contact-content {
     width: 80vw !important;
