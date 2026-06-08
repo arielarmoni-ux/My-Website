@@ -25,31 +25,35 @@
             margin: 0 auto !important;
             padding: 60px 0 100px 0 !important;
             display: flex !important;
-            flex-direction: row !important; /* דסקטופ: טורים זה לצד זה */
+            flex-direction: row !important;
             justify-content: space-between !important;
             align-items: start !important;
-            direction: ltr !important; /* הצמדת תוכן לשמאל כמקובל */
+            direction: ltr !important;
             box-sizing: border-box !important;
         }
 
         .about-text-column {
-            width: 55% !important; /* הטור השמאלי של הטקסט */
+            width: 55% !important;
             text-align: left !important;
             box-sizing: border-box !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
+        /* נעילת צבע וראות לפסקאות האודות */
         .about-text-column p {
             font-size: 15px !important;
             line-height: 1.7 !important;
             margin-bottom: 25px !important;
-            color: #333333 !important; /* אפור כהה קריא מאוד */
+            color: #333333 !important; /* אפור כהה עמוק וקבוע */
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
         }
 
         .about-image-column {
-            width: 38% !important; /* הטור הימני של התמונה */
+            width: 38% !important;
             box-sizing: border-box !important;
         }
 
@@ -60,21 +64,58 @@
             object-fit: cover !important;
         }
 
+        /* נעילת צבע וראות לאזור הלקוחות הנבחרים */
+        .clients-section { 
+            margin-top: 40px !important; 
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .clients-section h3 { 
+            font-size: 11px !important; 
+            text-transform: uppercase !important; 
+            letter-spacing: 2px !important; 
+            color: #888888 !important; /* צבע טקסט קבוע לכותרת */
+            margin-bottom: 25px !important; 
+            font-weight: 500 !important;
+            text-align: left !important;
+        }
+
+        .clients-list { 
+            list-style: none !important; 
+            padding: 0 !important; 
+            margin: 0 !important;
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 14px !important; 
+        }
+
+        .clients-list li { 
+            font-size: 13px !important; 
+            color: #444444 !important; /* צבע טקסט קבוע לרשימת המוזיאונים */
+            text-align: left !important;
+            border-bottom: none !important;
+            padding-bottom: 0 !important;
+            max-width: 100% !important;
+            display: list-item !important;
+        }
+
         /* התאמה מלאה למובייל וטאבלטים */
         @media (max-width: 900px) {
             .about-container-fixed {
-                flex-direction: column !important; /* מובייל: טור אחד אנכי */
+                flex-direction: column !important;
                 width: 90vw !important;
                 padding-top: 40px !important;
             }
             .about-text-column {
                 width: 100% !important;
-                order: 2 !important; /* הטקסט ירד למטה */
+                order: 2 !important;
             }
             .about-image-column {
                 width: 100% !important;
                 margin-bottom: 35px !important;
-                order: 1 !important; /* התמונה תעלה לראש העמוד */
+                order: 1 !important;
             }
         }
     </style>
@@ -140,7 +181,7 @@
                 container.innerHTML = htmlContent;
             } catch (e) {
                 console.error(e);
-                container.innerHTML = "<p>Error loading content. Please ensure about_content.txt exists.</p>";
+                container.innerHTML = "<p style='color:#333 !important;'>Error loading content. Please ensure about_content.txt exists.</p>";
             }
         }
 
