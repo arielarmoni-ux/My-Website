@@ -342,14 +342,14 @@ header + main > div:first-child {
     margin-bottom: 60px !important;
 }
 
-/* --- דף אודות (About Page) --- */
+/* --- דף אודות (About Page) - תיקון הצגת התמונה בדסקטופ ובמובייל --- */
 .about-content {
     width: 80vw !important;
     max-width: 1100px !important;
     margin: 0 auto;
     padding: 60px 0 100px !important; 
     display: grid; 
-    grid-template-columns: 1.1fr 1fr; 
+    grid-template-columns: 1.2fr 0.8fr; /* חלוקה פרופורציונלית: הטקסט מעט רחב יותר מהתמונה */
     gap: 80px; 
     align-items: start; 
     direction: ltr;
@@ -362,6 +362,22 @@ header + main > div:first-child {
     color: #333; 
 }
 
+/* אלמנט עוטף לתמונת הפרופיל באודות */
+.about-image-container {
+    width: 100%;
+    display: block;
+}
+
+/* !!! תיקון שורש הבעיה: הגדרת התמונה עצמה בדסקטופ !!! */
+.about-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    background: #f7f7f7; /* רקע עדין בזמן שהתמונה נטענת */
+}
+
+/* רשימת לקוחות נבחרים (Selected Clients) */
 .clients-section { margin-top: 40px; }
 .clients-section h3 { 
     font-size: 11px; 
