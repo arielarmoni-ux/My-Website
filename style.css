@@ -344,14 +344,15 @@ header + main > div:first-child:not(.about-text-col) {
 
 .about-grid-container {
     display: grid !important;
-    /* עדכון היחס: הטקסט נשאר רחב (1.2fr) והתמונה קטנה ב-50% (0.4fr) */
-    grid-template-columns: 1.2fr 0.4fr !important;
+    /* היחס שונה ל-2:1. התמונה תופסת בדיוק חצי מהרוחב של הטקסט */
+    grid-template-columns: 1.2fr 0.6fr !important;
     gap: 80px !important;
     width: 80vw !important;
     max-width: 1100px !important;
     margin: 0 auto !important;
     padding: 80px 0 100px !important;
-    align-items: stretch !important;
+    /* מונע מהתמונה להימתח לגובה הטקסט ומאפשר לה לשמור פרופורציה */
+    align-items: start !important;
     direction: ltr !important;
     box-sizing: border-box !important;
 }
@@ -404,16 +405,15 @@ header + main > div:first-child:not(.about-text-col) {
 
 .about-image-col {
     width: 100% !important;
-    height: 100% !important;
-    min-height: 400px !important;
-    background-color: #f7f7f7 !important;
+    /* מאפשר לבלוק לעטוף את התמונה לפי הגובה הטבעי שלה */
+    height: auto !important;
     display: block !important;
 }
 
 .about-image-col img {
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+    /* הגובה אוטומטי כדי שהתמונה לא תימעך או תיחתך */
+    height: auto !important;
     display: block !important;
 }
 
@@ -429,7 +429,8 @@ header + main > div:first-child:not(.about-text-col) {
     }
     .about-image-col { 
         order: -1 !important; 
-        height: 400px !important;
+        /* גובה אוטומטי גם במובייל לשמירה על פרופורציות */
+        height: auto !important; 
     }
 }
 
