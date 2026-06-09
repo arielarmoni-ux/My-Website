@@ -339,20 +339,19 @@ header + main > div:first-child:not(.about-text-col) {
 }
 
 /* =========================================
-   NEW ABOUT PAGE LAYOUT (FORCED GRID)
+   NEW ABOUT PAGE LAYOUT (FIXED IMAGE SIZE)
    ========================================= */
 
 .about-grid-container {
     display: grid !important;
-    /* היחס שונה ל-2:1. התמונה תופסת בדיוק חצי מהרוחב של הטקסט */
-    grid-template-columns: 1.2fr 0.6fr !important;
+    /* קבענו גודל קבוע לטור התמונה כדי לנעול את הפרופורציה המקורית שלה */
+    grid-template-columns: 1fr 300px !important; 
     gap: 80px !important;
     width: 80vw !important;
     max-width: 1100px !important;
     margin: 0 auto !important;
     padding: 80px 0 100px !important;
-    /* מונע מהתמונה להימתח לגובה הטקסט ומאפשר לה לשמור פרופורציה */
-    align-items: start !important;
+    align-items: start !important; /* חשוב! מונע מתיחה של התמונה לגובה הטקסט */
     direction: ltr !important;
     box-sizing: border-box !important;
 }
@@ -362,7 +361,7 @@ header + main > div:first-child:not(.about-text-col) {
     flex-direction: column !important;
     justify-content: flex-start !important;
     text-align: left !important;
-    height: 100% !important;
+    height: auto !important; /* הגובה גמיש לפי הטקסט */
 }
 
 .about-text-col p {
@@ -405,15 +404,13 @@ header + main > div:first-child:not(.about-text-col) {
 
 .about-image-col {
     width: 100% !important;
-    /* מאפשר לבלוק לעטוף את התמונה לפי הגובה הטבעי שלה */
-    height: auto !important;
+    height: auto !important; /* הגובה גמיש כדי לשמור על פרופורציה */
     display: block !important;
 }
 
 .about-image-col img {
     width: 100% !important;
-    /* הגובה אוטומטי כדי שהתמונה לא תימעך או תיחתך */
-    height: auto !important;
+    height: auto !important; /* נועל את הפרופורציה המקורית של הקובץ */
     display: block !important;
 }
 
@@ -429,7 +426,7 @@ header + main > div:first-child:not(.about-text-col) {
     }
     .about-image-col { 
         order: -1 !important; 
-        /* גובה אוטומטי גם במובייל לשמירה על פרופורציות */
+        width: 100% !important;
         height: auto !important; 
     }
 }
