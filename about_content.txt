@@ -6,6 +6,7 @@ CLIENTS:
 The Israel Museum, Jerusalem
 Tel Aviv Museum of Art
 Haifa Museum of Art
+Bloomfield Science Museum, Jerusalem
 Herzliya Museum of Contemporary Art
 Hecht Museum Haifa
 Design Museum Holon
@@ -13,3 +14,4 @@ Nahum Gutman Museum Tel Aviv
 Agam Museum Rishon Lezion
 Hansen House - Jerusalem
 Mamuta art & research center
+Sommer Contemporary Art
