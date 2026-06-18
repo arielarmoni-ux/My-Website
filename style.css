@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v5 - Absolute Mobile Fix) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Fixed Height Slider) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -403,7 +403,7 @@ header + main > div:first-child:not(.about-text-col) {
 }
 
 /* =========================================
-   PROJECT SLIDER & DYNAMIC CREDITS (UPDATED)
+   PROJECT SLIDER & DYNAMIC CREDITS (FIXED HEIGHT)
    ========================================= */
 
 .carousel-container {
@@ -411,7 +411,7 @@ header + main > div:first-child:not(.about-text-col) {
     width: 80vw !important;
     max-width: 1100px !important;
     margin: 0 auto 60px auto !important;
-    padding: 0 60px !important; /* ריפוד פנימי קבוע שיוצר מקום מוגן לחצים מחוץ לתמונה */
+    padding: 0 60px !important; 
     direction: ltr !important;
     box-sizing: border-box !important;
 }
@@ -429,32 +429,27 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* בלוק אחיד לכל סלייד המאפס ומאזן את חישובי הרוחב ב-100% */
+/* הסוד לאחידות: נעילת הגובה של הסלייד לערך קבוע (70vh).
+  זה מבטיח שהתצוגה לא תקפוץ לעולם כשעוברים בין תמונות אנכיות לאופקיות. 
+*/
 .carousel-slide {
     flex: 0 0 100% !important;
     width: 100% !important;
-    max-width: 100% !important;
+    height: 70vh !important; /* הגובה האחיד של כל הסליידר */
+    min-height: 400px !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     box-sizing: border-box !important;
 }
 
-/* מניעת עיוות והתאמת תמונות אנכיות (ורטיקליות) לגובה קבוע ומאוזן */
-.carousel-slide img {
-    max-height: 70vh !important; /* מונע מהן לחרוג מגובה המסך */
-    width: auto !important;
-    max-width: 100% !important;
-    object-fit: contain !important;
-    display: block !important;
-    margin: 0 auto !important;
-}
-
-/* התכווצות אלמנט הקרדיט במדויק לגבולות של התמונה המרכזית */
+/* עטיפת הקרדיט - יורשת את הגובה המלא מהקונטיינר, ומתכווצת לרוחב התמונה האמיתי */
 .carousel-slide .gallery-figure {
-    display: inline-flex !important;
+    display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important; 
+    justify-content: center !important;
+    height: 100% !important;
     width: auto !important;
     max-width: 100% !important;
     margin: 0 !important;
@@ -462,8 +457,25 @@ header + main > div:first-child:not(.about-text-col) {
     direction: ltr !important;
 }
 
+/* תמונות עם קרדיט (בתוך figure) מקבלות כמעט את כל הגובה (100% מינוס קצת מקום לטקסט).
+  תמונות בלי קרדיט מקבלות בדיוק 100% מהגובה.
+*/
 .carousel-slide .gallery-figure img {
-    margin-bottom: 12px !important;
+    height: calc(100% - 25px) !important; 
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 0 10px 0 !important;
+}
+
+.carousel-slide > img {
+    height: 100% !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
 }
 
 .photo-credit {
@@ -478,7 +490,6 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* מיקום חצי הניווט בצידי התמונה מבחוץ */
 .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -506,10 +517,9 @@ header + main > div:first-child:not(.about-text-col) {
     transform: translateY(-50%) scale(1.05);
 }
 
-.carousel-arrow.prev { left: 5px; } /* יושב בתוך המרווח החיצוני המוגן משמאל */
-.carousel-arrow.next { right: 5px; } /* יושב בתוך המרווח החיצוני המוגן מימין */
+.carousel-arrow.prev { left: 5px; }
+.carousel-arrow.next { right: 5px; }
 
-/* נקודות הניווט ישירות מתחת לקו התמונות */
 .carousel-dots {
     display: flex;
     justify-content: center;
@@ -608,4 +618,9 @@ header + main > div:first-child:not(.about-text-col) {
 @media (max-width: 480px) {
     .portfolio-grid { grid-template-columns: 1fr; }
     .logo { font-size: 24px; letter-spacing: 3px; }
+    
+    /* במובייל אפשר לאפשר לסליידר להיות קצת יותר נמוך כדי לאפשר מקום לטקסט */
+    .carousel-slide {
+        height: 50vh !important;
+    }
 }
