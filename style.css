@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v5 - Centered Slider & Bottom Nav) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Fixed Universal Header & Bottom Nav) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -54,7 +54,7 @@ body.nav-open #site-wrapper {
 
 body.nav-open #side-nav { left: 0; }
 
-/* --- ניווט טקסטואלי עליון --- */
+/* --- ניווט טקסטואלי עליון - קבוע בכל הדפים באותו מקום --- */
 .nav-wrapper { 
     position: absolute; 
     left: 5%; 
@@ -92,16 +92,6 @@ body.nav-open .nav-wrapper {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
-}
-
-body:not(:has(.portfolio-grid)) .nav-wrapper {
-    left: calc(50% - 40vw) !important;
-}
-
-@media (min-width: 1375px) {
-    body:not(:has(.portfolio-grid)) .nav-wrapper {
-        left: calc(50% - 550px) !important;
-    }
 }
 
 /* --- הגדרות סיידבר --- */
@@ -432,7 +422,6 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* התמונות מורכזו חזרה לאמצע החלון (justify-content: center) */
 .carousel-slide {
     flex: 0 0 100% !important;
     width: 100% !important;
@@ -487,7 +476,7 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* מיקום החצים של הסליידר מחוץ לגבולות התמונה */
+/* מיקום החצים מחוץ לגבולות התמונה */
 .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -569,9 +558,7 @@ header + main > div:first-child:not(.about-text-col) {
         align-items: center !important; 
     }
     
-    .nav-wrapper,
-    body .nav-wrapper,
-    body:not(:has(.portfolio-grid)) .nav-wrapper { 
+    .nav-wrapper { 
         position: relative !important; 
         left: auto !important; 
         right: auto !important;
@@ -610,9 +597,6 @@ header + main > div:first-child:not(.about-text-col) {
     }
     
     .project-description { margin-bottom: 40px !important; }
-    
-    .carousel-arrow.prev { left: 10px; }
-    .carousel-arrow.next { right: 10px; }
 }
 
 @media (max-width: 480px) {
