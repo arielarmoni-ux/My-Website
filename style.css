@@ -317,26 +317,6 @@ header + main > div:first-child:not(.about-text-col) {
 .project-description a { color: inherit; text-decoration: none; transition: all 0.3s ease; border-bottom: 1px solid transparent; }
 .project-description a:hover { color: var(--muted); border-bottom: 1px solid var(--muted); }
 
-.gallery { 
-    max-width: 100%; 
-    margin: 0 auto; 
-    padding: 0; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-}
-
-.gallery img { 
-    width: 80vw; 
-    max-width: 1100px; 
-    height: auto; 
-    display: block; 
-    margin-top: 0 !important;
-    margin-bottom: 35px !important; 
-}
-
-.gallery img:last-child { margin-bottom: 60px !important; }
-
 /* --- דף קשר (Contact Page) --- */
 .contact-content {
     width: 80vw !important;
@@ -423,27 +403,110 @@ header + main > div:first-child:not(.about-text-col) {
 }
 
 /* =========================================
-   DYNAMIC PHOTO CREDITS
+   PROJECT SLIDER & DYNAMIC CREDITS
    ========================================= */
 
-.gallery-figure {
+.carousel-container {
+    position: relative;
     width: 80vw !important;
     max-width: 1100px !important;
-    margin: 0 0 35px 0 !important; 
+    margin: 0 auto 80px auto !important;
+    direction: ltr !important; /* חובה ליישור ההחלקה משמאל לימין */
+}
+
+.carousel-track-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex !important;
+    flex-direction: row !important;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    width: 100% !important;
+    align-items: flex-start; 
+}
+
+.carousel-track .gallery-figure,
+.carousel-track > img {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    margin-bottom: 0 !important; /* דריסת המרווח הישן של הגלריה המאונכת */
     padding: 0 !important;
+    display: block !important;
+}
+
+.carousel-track img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+
+/* עיצוב חיצי הסליידר */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #eee;
+    color: var(--main);
+    font-size: 18px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.carousel-arrow:hover {
+    background: #fff;
+    color: var(--muted);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-arrow.prev { left: -22px; }
+.carousel-arrow.next { right: -22px; }
+
+/* עיצוב נקודות הניווט (Pagination) */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.carousel-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+    background-color: var(--muted);
+    transform: scale(1.3);
+}
+
+/* מיקום הקרדיט על התמונה */
+.gallery-figure {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important; 
-    direction: ltr !important; /* כפיית כיווניות משמאל לימין בשביל יישור הקרדיט */
-}
-
-.gallery-figure:last-child {
-    margin-bottom: 60px !important;
+    direction: ltr !important; 
 }
 
 .gallery-figure img {
     margin-bottom: 12px !important; 
-    width: 100% !important;
 }
 
 .photo-credit {
@@ -454,7 +517,7 @@ header + main > div:first-child:not(.about-text-col) {
     margin: 0 !important;
     font-weight: 400 !important;
     line-height: 1 !important;
-    text-align: left !important; /* נעילת יישור הטקסט לשמאל */
+    text-align: left !important; 
     width: 100% !important;
 }
 
@@ -512,8 +575,7 @@ header + main > div:first-child:not(.about-text-col) {
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     body.nav-open #site-wrapper { transform: translateX(var(--nav-width)); margin-left: 0; width: 100%; }
     
-    .gallery img,
-    .gallery-figure,
+    .carousel-container,
     header + main > div:first-child:not(.about-text-col),
     .contact-content,
     .about-grid-container {
@@ -524,8 +586,10 @@ header + main > div:first-child:not(.about-text-col) {
     }
     
     .project-description { margin-bottom: 40px !important; }
-    .gallery img { margin-bottom: 25px !important; }
-    .gallery-figure { margin-bottom: 25px !important; }
+    
+    /* במובייל נכניס את החצים טיפה פנימה כדי שלא יחתכו */
+    .carousel-arrow.prev { left: 10px; }
+    .carousel-arrow.next { right: 10px; }
     
     #prev-project, #next-project { display: none; }
 }
