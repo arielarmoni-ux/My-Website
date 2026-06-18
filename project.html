@@ -109,9 +109,7 @@
                     });
                 }
 
-                // ==========================================
-                // בניית מבנה הסליידר (Carousel)
-                // ==========================================
+                // בניית מבנה הקרוסלה
                 const gallery = document.getElementById('gallery');
                 
                 const carouselContainer = document.createElement('div');
@@ -167,8 +165,12 @@
                     }
                 });
 
+                // פונקציית הזרקה משודרגת העוטפת כל אלמנט בסלייד ייעודי אחיד
                 function addSlideToCarousel(element) {
-                    track.appendChild(element);
+                    const slide = document.createElement('div');
+                    slide.className = 'carousel-slide';
+                    slide.appendChild(element);
+                    track.appendChild(slide);
                     
                     const dot = document.createElement('div');
                     dot.className = 'carousel-dot';
@@ -183,7 +185,6 @@
                     dotsContainer.appendChild(dot);
                     totalSlides++;
                     
-                    // מסתיר את החצים והנקודות אם יש רק תמונה אחת
                     if (totalSlides <= 1) {
                         prevBtn.style.display = 'none';
                         nextBtn.style.display = 'none';
@@ -195,9 +196,7 @@
                     }
                 }
 
-                // ==========================================
-                // טעינת התמונות והזרקתן לסליידר
-                // ==========================================
+                // לולאת טעינת קבצי הדירוג
                 for (let i = 1; i <= 50; i++) {
                     const imgNum = i.toString().padStart(2, '0');
                     const img = document.createElement('img');
