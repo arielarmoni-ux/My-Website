@@ -39,6 +39,7 @@
                 <div id="project-meta" class="project-meta"></div>
                 <div id="project-desc" class="project-description"></div>
             </div>
+            
             <div id="gallery" class="gallery"></div>
         </main>
     </div>
@@ -64,7 +65,6 @@
                 const res = await fetch(`${base}/images/${folder}/info.txt?v=${cb}`);
                 const fullText = await res.text();
                 
-                // פיצול הקובץ בין המידע של הפרויקט לרשימת ה-FILES
                 const parts = fullText.split("FILES:");
                 const lines = parts[0].split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
 
@@ -92,42 +92,120 @@
                     }
                 });
 
-                // יצירת מפת קרדיטים מתוך רשימת ה-FILES
                 const creditsMap = {};
                 if (parts[1]) {
                     parts[1].split(/\r?\n/).forEach(line => {
                         line = line.trim();
                         if (!line) return;
                         
-                        // לקיחת שתי האותיות הראשונות כמספר התמונה (למשל "01")
                         const imgNum = line.substring(0, 2);
-                        
                         if (line.includes(' - ')) {
                             let creditText = line.split(' - ').slice(1).join(' - ').trim();
-                            
-                            // מנקה אוטומטית סיומות קבצים אם הן נשארו בטקסט כדי להציג רק את הקרדיט נקי
                             if (creditText.toLowerCase().endsWith('.jpg')) creditText = creditText.slice(0, -4);
                             if (creditText.toLowerCase().endsWith('.jpeg')) creditText = creditText.slice(0, -5);
                             if (creditText.toLowerCase().endsWith('.png')) creditText = creditText.slice(0, -4);
-                            
                             creditsMap[imgNum] = creditText.trim();
                         }
                     });
                 }
 
+                // ==========================================
+                // בניית מבנה הסליידר (Carousel)
+                // ==========================================
                 const gallery = document.getElementById('gallery');
                 
-                // הלולאה המקורית שרצה על קבצי 01.jpg, 02.jpg ועוצרת כשנגמרות התמונות בתיקייה
+                const carouselContainer = document.createElement('div');
+                carouselContainer.className = 'carousel-container';
+                
+                const trackWrapper = document.createElement('div');
+                trackWrapper.className = 'carousel-track-wrapper';
+                
+                const track = document.createElement('div');
+                track.className = 'carousel-track';
+                
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'carousel-arrow prev';
+                prevBtn.innerHTML = '&#10094;';
+                
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'carousel-arrow next';
+                nextBtn.innerHTML = '&#10095;';
+                
+                const dotsContainer = document.createElement('div');
+                dotsContainer.className = 'carousel-dots';
+                
+                trackWrapper.appendChild(track);
+                carouselContainer.appendChild(prevBtn);
+                carouselContainer.appendChild(trackWrapper);
+                carouselContainer.appendChild(nextBtn);
+                carouselContainer.appendChild(dotsContainer);
+                gallery.appendChild(carouselContainer);
+
+                let currentIndex = 0;
+                let totalSlides = 0;
+
+                function updateCarousel() {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+
+                prevBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateCarousel();
+                    }
+                });
+
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (currentIndex < totalSlides - 1) {
+                        currentIndex++;
+                        updateCarousel();
+                    }
+                });
+
+                function addSlideToCarousel(element) {
+                    track.appendChild(element);
+                    
+                    const dot = document.createElement('div');
+                    dot.className = 'carousel-dot';
+                    if (totalSlides === 0) dot.classList.add('active');
+                    
+                    const slideIndex = totalSlides;
+                    dot.addEventListener('click', () => {
+                        currentIndex = slideIndex;
+                        updateCarousel();
+                    });
+                    
+                    dotsContainer.appendChild(dot);
+                    totalSlides++;
+                    
+                    // מסתיר את החצים והנקודות אם יש רק תמונה אחת
+                    if (totalSlides <= 1) {
+                        prevBtn.style.display = 'none';
+                        nextBtn.style.display = 'none';
+                        dotsContainer.style.display = 'none';
+                    } else {
+                        prevBtn.style.display = 'flex';
+                        nextBtn.style.display = 'flex';
+                        dotsContainer.style.display = 'flex';
+                    }
+                }
+
+                // ==========================================
+                // טעינת התמונות והזרקתן לסליידר
+                // ==========================================
                 for (let i = 1; i <= 50; i++) {
                     const imgNum = i.toString().padStart(2, '0');
                     const img = document.createElement('img');
                     img.src = `${base}/images/${folder}/${imgNum}.jpg`;
                     img.alt = `${projectTitle} - image ${i}`;
-                    img.style.display = 'block';
 
                     const ok = await new Promise((resolve) => {
                         img.onload = () => {
-                            // אם מצאנו ברשימה קרדיט שמתאים למספר התמונה הנוכחי
                             if (creditsMap[imgNum]) {
                                 const figure = document.createElement('figure');
                                 figure.className = 'gallery-figure';
@@ -136,11 +214,11 @@
                                 figcaption.className = 'photo-credit';
                                 figcaption.textContent = creditsMap[imgNum];
                                 
-                                gallery.appendChild(figure);
                                 figure.appendChild(img);
                                 figure.appendChild(figcaption);
+                                addSlideToCarousel(figure);
                             } else {
-                                gallery.appendChild(img);
+                                addSlideToCarousel(img);
                             }
                             resolve(true);
                         };
