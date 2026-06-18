@@ -381,7 +381,6 @@ header + main > div:first-child:not(.about-text-col) {
 }
 
 .clients-section {
-    /* הריווח הוחלף מ-auto ל-120px שנותן בדיוק את הרווח של 5 שורות שביקשת */
     margin-top: 120px !important; 
     padding-top: 0 !important;
 }
@@ -421,6 +420,39 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
     height: auto !important; 
     display: block !important;
+}
+
+/* =========================================
+   DYNAMIC PHOTO CREDITS
+   ========================================= */
+
+.gallery-figure {
+    width: 80vw !important;
+    max-width: 1100px !important;
+    margin: 0 0 35px 0 !important; 
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; 
+}
+
+.gallery-figure:last-child {
+    margin-bottom: 60px !important;
+}
+
+.gallery-figure img {
+    margin-bottom: 12px !important; 
+    width: 100% !important;
+}
+
+.photo-credit {
+    font-size: 10px !important;
+    color: var(--muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    margin: 0 !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
 }
 
 /* --- מובייל והתאמות רספונסיביות --- */
@@ -478,6 +510,7 @@ header + main > div:first-child:not(.about-text-col) {
     body.nav-open #site-wrapper { transform: translateX(var(--nav-width)); margin-left: 0; width: 100%; }
     
     .gallery img,
+    .gallery-figure,
     header + main > div:first-child:not(.about-text-col),
     .contact-content,
     .about-grid-container {
@@ -489,6 +522,7 @@ header + main > div:first-child:not(.about-text-col) {
     
     .project-description { margin-bottom: 40px !important; }
     .gallery img { margin-bottom: 25px !important; }
+    .gallery-figure { margin-bottom: 25px !important; }
     
     #prev-project, #next-project { display: none; }
 }
