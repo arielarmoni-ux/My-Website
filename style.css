@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v5 - Proportional Vertical Slider) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Enlarged Slider) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -232,7 +232,7 @@ header {
     font-weight: 500; 
 }
 
-/* --- חצי ניווט פנימיים בדף פרויקט --- */
+/* --- חצי ניווט פנימיים (עודכן לטקסט טיפוגרפי פרימיום) --- */
 .nav-arrow { 
     position: fixed; 
     top: 50%; 
@@ -240,14 +240,16 @@ header {
     z-index: 2500; 
     text-decoration: none; 
     color: var(--main); 
-    font-size: clamp(24px, 2.5vw, 40px); 
-    opacity: 0.2; 
-    padding: 10px; 
+    font-size: 10px; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.3; 
     transition: all 0.3s ease; 
+    white-space: nowrap;
 }
 
-#prev-project { left: calc(50% - 40vw - 50px) !important; }
-#next-project { right: calc(50% - 40vw - 50px) !important; }
+#prev-project { left: calc(50% - 40vw - 120px) !important; }
+#next-project { right: calc(50% - 40vw - 120px) !important; }
 
 @media (max-width: 1300px) {
     #prev-project { left: 2% !important; }
@@ -257,7 +259,7 @@ header {
 .nav-arrow:hover { 
     opacity: 1; 
     color: var(--muted); 
-    transform: translateY(-50%) scale(1.1); 
+    transform: translateY(-50%) scale(1.02); 
 }
 
 /* --- דף פרויקט פנימי --- */
@@ -311,7 +313,7 @@ header + main > div:first-child:not(.about-text-col) {
     direction: ltr !important; 
     white-space: pre-wrap !important; 
     margin-top: 0 !important;
-    margin-bottom: 35px !important; 
+    margin-bottom: 15px !important; /* צומצם ל-15px כדי למשוך את הגלריה הכי קרוב לטקסט */
 }
 
 .project-description a { color: inherit; text-decoration: none; transition: all 0.3s ease; border-bottom: 1px solid transparent; }
@@ -403,7 +405,7 @@ header + main > div:first-child:not(.about-text-col) {
 }
 
 /* =========================================
-   PROJECT SLIDER & DYNAMIC CREDITS (PERFECTED VERTICAL SCALE)
+   PROJECT SLIDER & DYNAMIC CREDITS (ENLARGED WINDOW)
    ========================================= */
 
 .carousel-container {
@@ -429,13 +431,12 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* נעילת הגובה האנכי ל-55vh. השינוי המרכזי שמאלץ את התמונות האנכיות 
-   להצטמצם לגודל של חלון רוחבי קלאסי ולא לבלוט החוצה. */
+/* גובה החלון הוגדל ל-75vh כדי שהקרוסלה תהיה גדולה משמעותית ותתקרב לטקסט */
 .carousel-slide {
     flex: 0 0 100% !important;
     width: 100% !important;
-    height: 55vh !important; 
-    min-height: 380px !important;
+    height: 75vh !important; 
+    min-height: 450px !important;
     display: flex !important;
     justify-content: center !important;
     align-items: flex-start !important; 
@@ -515,13 +516,12 @@ header + main > div:first-child:not(.about-text-col) {
 .carousel-arrow.prev { left: 5px; }
 .carousel-arrow.next { right: 5px; }
 
-/* נקודות הניווט - קורבו משמעותית לתחתית הגלריה */
 .carousel-dots {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
-    margin-top: 10px !important; /* צומצם מ-25px כדי להצמיד אותן לתמונות */
+    margin-top: 10px !important; 
     width: 100%;
 }
 
@@ -616,6 +616,6 @@ header + main > div:first-child:not(.about-text-col) {
     .logo { font-size: 24px; letter-spacing: 3px; }
     
     .carousel-slide {
-        height: 45vh !important;
+        height: 50vh !important;
     }
 }
