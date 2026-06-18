@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v5 - Fixed Height Slider) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Proportional Vertical Slider) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -311,7 +311,7 @@ header + main > div:first-child:not(.about-text-col) {
     direction: ltr !important; 
     white-space: pre-wrap !important; 
     margin-top: 0 !important;
-    margin-bottom: 70px !important; 
+    margin-bottom: 35px !important; 
 }
 
 .project-description a { color: inherit; text-decoration: none; transition: all 0.3s ease; border-bottom: 1px solid transparent; }
@@ -403,7 +403,7 @@ header + main > div:first-child:not(.about-text-col) {
 }
 
 /* =========================================
-   PROJECT SLIDER & DYNAMIC CREDITS (FIXED HEIGHT)
+   PROJECT SLIDER & DYNAMIC CREDITS (PERFECTED VERTICAL SCALE)
    ========================================= */
 
 .carousel-container {
@@ -429,26 +429,24 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* הסוד לאחידות: נעילת הגובה של הסלייד לערך קבוע (70vh).
-  זה מבטיח שהתצוגה לא תקפוץ לעולם כשעוברים בין תמונות אנכיות לאופקיות. 
-*/
+/* נעילת הגובה האנכי ל-55vh. השינוי המרכזי שמאלץ את התמונות האנכיות 
+   להצטמצם לגודל של חלון רוחבי קלאסי ולא לבלוט החוצה. */
 .carousel-slide {
     flex: 0 0 100% !important;
     width: 100% !important;
-    height: 70vh !important; /* הגובה האחיד של כל הסליידר */
-    min-height: 400px !important;
+    height: 55vh !important; 
+    min-height: 380px !important;
     display: flex !important;
     justify-content: center !important;
-    align-items: center !important;
+    align-items: flex-start !important; 
     box-sizing: border-box !important;
 }
 
-/* עטיפת הקרדיט - יורשת את הגובה המלא מהקונטיינר, ומתכווצת לרוחב התמונה האמיתי */
 .carousel-slide .gallery-figure {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important; 
-    justify-content: center !important;
+    justify-content: flex-start !important; 
     height: 100% !important;
     width: auto !important;
     max-width: 100% !important;
@@ -457,16 +455,13 @@ header + main > div:first-child:not(.about-text-col) {
     direction: ltr !important;
 }
 
-/* תמונות עם קרדיט (בתוך figure) מקבלות כמעט את כל הגובה (100% מינוס קצת מקום לטקסט).
-  תמונות בלי קרדיט מקבלות בדיוק 100% מהגובה.
-*/
 .carousel-slide .gallery-figure img {
-    height: calc(100% - 25px) !important; 
+    height: calc(100% - 22px) !important; 
     width: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
     display: block !important;
-    margin: 0 0 10px 0 !important;
+    margin: 0 0 8px 0 !important;
 }
 
 .carousel-slide > img {
@@ -520,12 +515,13 @@ header + main > div:first-child:not(.about-text-col) {
 .carousel-arrow.prev { left: 5px; }
 .carousel-arrow.next { right: 5px; }
 
+/* נקודות הניווט - קורבו משמעותית לתחתית הגלריה */
 .carousel-dots {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
-    margin-top: 25px;
+    margin-top: 10px !important; /* צומצם מ-25px כדי להצמיד אותן לתמונות */
     width: 100%;
 }
 
@@ -619,8 +615,7 @@ header + main > div:first-child:not(.about-text-col) {
     .portfolio-grid { grid-template-columns: 1fr; }
     .logo { font-size: 24px; letter-spacing: 3px; }
     
-    /* במובייל אפשר לאפשר לסליידר להיות קצת יותר נמוך כדי לאפשר מקום לטקסט */
     .carousel-slide {
-        height: 50vh !important;
+        height: 45vh !important;
     }
 }
