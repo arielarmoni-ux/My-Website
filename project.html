@@ -4,22 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project | Ariel Armoni</title>
-    <meta name="description" content="Exhibition design project by Ariel Armoni - architect and exhibition designer.">
-
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Ariel Armoni | Exhibition Architecture">
-    <meta property="og:title" content="Project | Ariel Armoni">
-    <meta property="og:description" content="Exhibition design project by Ariel Armoni.">
-    <meta property="og:image" content="">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>A</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="#" id="prev-project" class="nav-arrow">previous</a>
-    <a href="#" id="next-project" class="nav-arrow">next</a>
-
     <div id="site-wrapper">
         <header>
             <div class="nav-wrapper">
@@ -30,17 +17,21 @@
                 </div>
             </div>
             <a href="index.html" class="logo">ARIEL ARMONI</a>
-            <div class="sub-logo" style="font-size: 13px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-top: 8px;">Exhibition Architecture</div>
+            <div class="sub-logo">Exhibition Architecture</div>
         </header>
 
         <main>
-            <div style="text-align: center; padding: 60px 5% 5px;">
-                <h1 id="project-title" style="font-size: 20px; letter-spacing: 4px; text-transform: uppercase; font-weight: 400; margin-bottom: 25px;"></h1>
+            <div class="project-content-container">
+                <h1 id="project-title"></h1>
                 <div id="project-meta" class="project-meta"></div>
                 <div id="project-desc" class="project-description"></div>
+                <div id="gallery" class="gallery"></div>
+                
+                <div class="project-nav-bottom">
+                    <a href="#" id="prev-project">previous</a>
+                    <a href="#" id="next-project">next</a>
+                </div>
             </div>
-            
-            <div id="gallery" class="gallery"></div>
         </main>
     </div>
 
@@ -49,66 +40,25 @@
         async function initProject() {
             const folder = new URLSearchParams(window.location.search).get('folder');
             if (!folder) return;
-
-            try {
-                const { folders } = await window.portfolioData;
-                const idx = folders.indexOf(folder);
-
-                if (idx !== -1) {
-                    document.getElementById('prev-project').href = `project.html?folder=${folders[idx <= 0 ? folders.length - 1 : idx - 1]}`;
-                    document.getElementById('next-project').href = `project.html?folder=${folders[idx >= folders.length - 1 ? 0 : idx + 1]}`;
-                }
-
-                const base = typeof baseURL !== 'undefined' ? baseURL : '';
-                const cb = typeof cacheBuster !== 'undefined' ? cacheBuster : Date.now();
-
-                const res = await fetch(`${base}/images/${folder}/info.txt?v=${cb}`);
-                const fullText = await res.text();
-                
-                const parts = fullText.split("FILES:");
-                const lines = parts[0].split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
-
-                const projectTitle = lines[0];
-                document.getElementById('project-title').textContent = projectTitle;
-                document.title = `${projectTitle} | Ariel Armoni`;
-                document.querySelector('meta[property="og:title"]').setAttribute('content', `${projectTitle} | Ariel Armoni`);
-
-                const coverURL = `${base}/images/${folder}/cover.webp`;
-                document.querySelector('meta[property="og:image"]').setAttribute('content', coverURL);
-
-                const metaDiv = document.getElementById('project-meta');
-                const descDiv = document.getElementById('project-desc');
-
-                lines.slice(1).forEach(line => {
-                    if (line.includes(":")) {
-                        const [k, ...v] = line.split(":");
-                        const item = document.createElement('div');
-                        item.className = 'meta-item';
-                        item.innerHTML = `<span class="label">${k.trim()}:</span><span class="value">${v.join(":").trim()}</span>`;
-                        metaDiv.appendChild(item);
-                    } else {
-                        const br = descDiv.innerHTML ? '<br><br>' : '';
-                        descDiv.innerHTML += br + line;
-                    }
-                });
-
-                const creditsMap = {};
-                if (parts[1]) {
-                    parts[1].split(/\r?\n/).forEach(line => {
-                        line = line.trim();
-                        if (!line) return;
-                        
-                        const imgNum = line.substring(0, 2);
-                        if (line.includes(' - ')) {
-                            let creditText = line.split(' - ').slice(1).join(' - ').trim();
-                            if (creditText.toLowerCase().endsWith('.jpg')) creditText = creditText.slice(0, -4);
-                            if (creditText.toLowerCase().endsWith('.jpeg')) creditText = creditText.slice(0, -5);
-                            if (creditText.toLowerCase().endsWith('.png')) creditText = creditText.slice(0, -4);
-                            creditsMap[imgNum] = creditText.trim();
-                        }
-                    });
-                }
-
-                const gallery = document.getElementById('gallery');
-                
-                const carouselContainer
+            const base = typeof baseURL !== 'undefined' ? baseURL : '';
+            const res = await fetch(`${base}/images/${folder}/info.txt?v=${Date.now()}`);
+            const fullText = await res.text();
+            
+            const parts = fullText.split("FILES:");
+            const lines = parts[0].split(/\r?\n/).filter(l => l.trim() !== "");
+            
+            document.getElementById('project-title').textContent = lines[0];
+            // טעינת תמונות בסיסית (בלי סליידרים מסובכים כרגע)
+            const gallery = document.getElementById('gallery');
+            for (let i = 1; i <= 50; i++) {
+                const num = i.toString().padStart(2, '0');
+                const img = document.createElement('img');
+                img.src = `${base}/images/${folder}/${num}.jpg`;
+                img.onerror = () => img.remove();
+                gallery.appendChild(img);
+            }
+        }
+        initProject();
+    </script>
+</body>
+</html>
