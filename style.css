@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v5 - Fixed Universal Header & Bottom Nav) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Centered Slider & Bottom Nav) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -54,7 +54,7 @@ body.nav-open #site-wrapper {
 
 body.nav-open #side-nav { left: 0; }
 
-/* --- ניווט טקסטואלי עליון - קבוע בכל הדפים באותו מקום --- */
+/* --- ניווט טקסטואלי עליון - קבוע באותו מקום בכל הדפים --- */
 .nav-wrapper { 
     position: absolute; 
     left: 5%; 
@@ -222,35 +222,35 @@ header {
     font-weight: 500; 
 }
 
-/* --- ניווט פרויקטים תחתון --- */
+/* --- ניווט פרויקטים תחתון (Previous | Next) --- */
 .project-nav-bottom {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 15px !important;
-    padding: 40px 0 80px 0 !important;
-    width: 100% !important;
-    direction: ltr !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0 80px 0;
+    width: 100%;
+    direction: ltr;
 }
 
 .project-nav-bottom a {
-    font-size: 12px !important;
-    text-transform: uppercase !important;
-    letter-spacing: 2px !important;
-    color: var(--main) !important;
-    text-decoration: none !important;
-    opacity: 0.6 !important;
-    transition: all 0.3s ease !important;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--main);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: all 0.3s ease;
 }
 
 .project-nav-bottom a:hover {
-    opacity: 1 !important;
+    opacity: 1;
 }
 
 .nav-divider {
-    color: var(--muted) !important;
-    font-size: 12px !important;
-    opacity: 0.6 !important;
+    color: var(--muted);
+    font-size: 12px;
+    opacity: 0.6;
 }
 
 /* --- דף פרויקט פנימי --- */
@@ -422,13 +422,14 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
+/* התמונות מורכזו חזרה לאמצע החלון (justify-content: center) */
 .carousel-slide {
     flex: 0 0 100% !important;
     width: 100% !important;
     height: 55vh !important; 
     min-height: 350px !important;
     display: flex !important;
-    justify-content: center !important; 
+    justify-content: center !important;
     align-items: flex-start !important; 
     box-sizing: border-box !important;
 }
@@ -476,7 +477,7 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* מיקום החצים מחוץ לגבולות התמונה */
+/* מיקום החצים של הקרוסלה מחוץ לגבולות התמונה */
 .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -507,7 +508,7 @@ header + main > div:first-child:not(.about-text-col) {
 .carousel-arrow.prev { left: -50px; }
 .carousel-arrow.next { right: -50px; }
 
-/* נקודות ניווט */
+/* נקודות ניווט של הקרוסלה */
 .carousel-dots {
     display: flex;
     justify-content: center;
@@ -558,7 +559,9 @@ header + main > div:first-child:not(.about-text-col) {
         align-items: center !important; 
     }
     
-    .nav-wrapper { 
+    .nav-wrapper,
+    body .nav-wrapper,
+    body:not(:has(.portfolio-grid)) .nav-wrapper { 
         position: relative !important; 
         left: auto !important; 
         right: auto !important;
@@ -583,10 +586,6 @@ header + main > div:first-child:not(.about-text-col) {
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     body.nav-open #site-wrapper { transform: translateX(var(--nav-width)); margin-left: 0; width: 100%; }
     
-    .carousel-container {
-        padding: 0 40px !important; 
-    }
-    
     header + main > div:first-child:not(.about-text-col),
     .contact-content,
     .about-grid-container {
@@ -597,13 +596,56 @@ header + main > div:first-child:not(.about-text-col) {
     }
     
     .project-description { margin-bottom: 40px !important; }
+
+    /* ========================================================
+       REVERT TO VERTICAL SCROLL ON MOBILE
+       ======================================================== */
+    .carousel-container {
+        padding: 0 !important; 
+        margin-bottom: 60px !important;
+        width: 100% !important;
+    }
+
+    .carousel-track-wrapper {
+        overflow: visible !important;
+        height: auto !important;
+    }
+
+    .carousel-track {
+        flex-direction: column !important; 
+        transform: none !important; 
+        gap: 35px !important; 
+    }
+
+    .carousel-slide {
+        height: auto !important;
+        min-height: auto !important;
+        flex: none !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .carousel-slide > img,
+    .carousel-slide .gallery-figure img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important; 
+        margin-bottom: 12px !important; 
+    }
+
+    .carousel-slide .gallery-figure {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* הסתרת חצים ונקודות של הקרוסלה בלבד, הניווט למטה נשאר */
+    .carousel-arrow, .carousel-dots {
+        display: none !important;
+    }
 }
 
 @media (max-width: 480px) {
     .portfolio-grid { grid-template-columns: 1fr; }
     .logo { font-size: 24px; letter-spacing: 3px; }
-    
-    .carousel-slide {
-        height: 45vh !important;
-    }
 }
