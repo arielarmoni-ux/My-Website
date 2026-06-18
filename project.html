@@ -6,6 +6,7 @@
     <title>Project | Ariel Armoni</title>
     <meta name="description" content="Exhibition design project by Ariel Armoni - architect and exhibition designer.">
 
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Ariel Armoni | Exhibition Architecture">
     <meta property="og:title" content="Project | Ariel Armoni">
@@ -58,10 +59,14 @@
                     document.getElementById('next-project').href = `project.html?folder=${folders[idx >= folders.length - 1 ? 0 : idx + 1]}`;
                 }
 
-                const res = await fetch(`${baseURL}/images/${folder}/info.txt?v=${cacheBuster}`);
+                // הגנת משתנים במקרה שהם לא מוגדרים ב-sidebar.js
+                const base = typeof baseURL !== 'undefined' ? baseURL : '';
+                const cb = typeof cacheBuster !== 'undefined' ? cacheBuster : Date.now();
+
+                const res = await fetch(`${base}/images/${folder}/info.txt?v=${cb}`);
                 const fullText = await res.text();
                 
-                // פיצול הקובץ בין המידע הרגיל לרשימת הקבצים
+                // פיצול הקובץ בין המידע הרגיל לרשימת הקבצים (אם קיימת)
                 const parts = fullText.split("FILES:");
                 const lines = parts[0].split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
 
@@ -70,7 +75,7 @@
                 document.title = `${projectTitle} | Ariel Armoni`;
                 document.querySelector('meta[property="og:title"]').setAttribute('content', `${projectTitle} | Ariel Armoni`);
 
-                const coverURL = `${baseURL}/images/${folder}/cover.webp`;
+                const coverURL = `${base}/images/${folder}/cover.webp`;
                 document.querySelector('meta[property="og:image"]').setAttribute('content', coverURL);
 
                 const metaDiv = document.getElementById('project-meta');
@@ -89,25 +94,25 @@
                     }
                 });
 
-                // טעינת התמונות והקרדיטים מתוך הרשימה בסוף ה-info.txt
+                const gallery = document.getElementById('gallery');
+
+                // בדיקה איזו שיטה להפעיל
                 if (parts[1]) {
+                    // ===== שיטה חדשה (עם קרדיטים) מתוך FILES: =====
                     const fileNames = parts[1].split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
-                    const gallery = document.getElementById('gallery');
 
                     for (const filename of fileNames) {
                         const img = document.createElement('img');
-                        img.src = `${baseURL}/images/${folder}/${filename}`;
+                        img.src = `${base}/images/${folder}/${filename}`;
                         img.alt = `${projectTitle} image`;
                         img.style.display = 'block';
 
-                        // חילוץ הקרדיט משם הקובץ
                         const nameWithoutExt = filename.substring(0, filename.lastIndexOf('.'));
                         let creditText = "";
                         if (nameWithoutExt.includes(' - ')) {
                             creditText = nameWithoutExt.split(' - ').slice(1).join(' - ').trim();
                         }
 
-                        // המתנה לטעינת התמונה לפני הכנסתה לדף
                         await new Promise((resolve) => {
                             img.onload = () => {
                                 if (creditText) {
@@ -126,8 +131,24 @@
                                 }
                                 resolve(true);
                             };
-                            img.onerror = () => resolve(false); // מדלג אם הקובץ לא נמצא
+                            img.onerror = () => resolve(false); 
                         });
+                    }
+                } else {
+                    // ===== שיטה ישנה (ניחוש מ-1 עד 50) לפרויקטים ישנים =====
+                    for (let i = 1; i <= 50; i++) {
+                        const imgNum = i.toString().padStart(2, '0');
+                        const img = document.createElement('img');
+                        img.src = `${base}/images/${folder}/${imgNum}.jpg`;
+                        img.alt = `${projectTitle} - image ${i}`;
+                        img.style.display = 'block';
+
+                        const ok = await new Promise((resolve) => {
+                            img.onload = () => { gallery.appendChild(img); resolve(true); };
+                            img.onerror = () => { img.remove(); resolve(false); };
+                        });
+
+                        if (!ok) break;
                     }
                 }
 
