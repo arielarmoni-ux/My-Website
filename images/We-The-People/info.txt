@@ -3,7 +3,19 @@ Role: Exhibition design with Eyal Rozen
 Client: Israel Museum Jerusalem
 Year: 2015
 Curator: Rita Kersting
-Photography: Elie Posner
+
 Participating artists -  Pawel Althamer, Cyprien Gaillard, Melanie Gilligan, Shilpa Gupta, Susan Hefuna,Yoav Horesh, Auguste Rodin, Sala-Manca Group, Yeshaiau Rabinowitz, Itamar Mendes-Flohr, Wolfgang Tillmans, Danh Vo, Lawrence Weiner, Artur Zmijewski, Natalia Zourabova.
 
 A new exhibition of international art exploring the collective’s role in society, the empowering of the individual, and the aggregation of a communal “we.” Paintings, sculpture, photography, and video works touch on subjects such as immigration, religion, and nationality, allowing for historical reflection and critical discussion.
+
+FILES:
+01 - Photo by Elie Posner
+02 - Photo by Elie Posner
+03 - Photo by Elie Posner
+04 - Photo by Elie Posner
+05 - Photo by Elie Posner
+06 - Photo by Elie Posner
+07 - Photo by Elie Posner
+08 - Photo by Elie Posner
+09 - 3D Visualisation Ariel Armoni
+
