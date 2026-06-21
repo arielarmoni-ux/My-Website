@@ -31,15 +31,17 @@
         </header>
 
         <main>
-            <div style="text-align: center; padding: 60px 5% 20px;">
-                <h1 id="project-title" style="font-size: 20px; letter-spacing: 4px; text-transform: uppercase; font-weight: 400; margin-bottom: 25px;"></h1>
-                <div id="project-meta" class="project-meta"></div>
-                <div id="project-desc" class="project-description"></div>
+            <div style="text-align: center; padding: 50px 5% 30px;">
+                <h1 id="project-title" style="font-size: 20px; letter-spacing: 4px; text-transform: uppercase; font-weight: 400; margin: 0;"></h1>
             </div>
             
             <div id="gallery" class="gallery"></div>
 
-            <!-- הניווט החדש בתחתית העמוד -->
+            <div class="project-bottom-text">
+                <div id="project-meta" class="project-meta"></div>
+                <div id="project-desc" class="project-description"></div>
+            </div>
+
             <div class="project-nav-bottom">
                 <a href="#" id="prev-project">previous</a>
                 <span class="nav-divider">|</span>
@@ -83,7 +85,6 @@
                 const metaDiv = document.getElementById('project-meta');
                 const descDiv = document.getElementById('project-desc');
                 
-                // משתנה לשמירת הצלם הגלובלי
                 let globalCredit = "";
 
                 lines.slice(1).forEach(line => {
@@ -92,12 +93,9 @@
                         const keyString = k.trim();
                         const valString = v.join(":").trim();
                         
-                        // בדיקה אם זה קרדיט צילום
                         if (keyString.toLowerCase() === 'photography' || keyString.toLowerCase() === 'photo') {
                             globalCredit = valString;
-                            // אנחנו לא מוסיפים את זה ל-metaDiv כדי להעלים את זה מתיאור הפרויקט
                         } else {
-                            // שאר הנתונים נכנסים כרגיל
                             const item = document.createElement('div');
                             item.className = 'meta-item';
                             item.innerHTML = `<span class="label">${keyString}:</span><span class="value">${valString}</span>`;
