@@ -1,8 +1,7 @@
 In Search of Lost Body
-Role: Exhibition design
-For: Haifa Museum of Art
-Date: 2026
-Curator: Meir itkin
+Client: Haifa Museum of Art
+Year: 2026
+Curator: Meir Itkin
 Graphic Design: Noa Segal
 Photography: Elie Posner
 
