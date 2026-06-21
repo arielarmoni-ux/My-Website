@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (v5 - Centered Slider & Bottom Nav) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Title -> Slider -> Text Below) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -54,7 +54,7 @@ body.nav-open #site-wrapper {
 
 body.nav-open #side-nav { left: 0; }
 
-/* --- ניווט טקסטואלי עליון - קבוע באותו מקום בכל הדפים --- */
+/* --- ניווט טקסטואלי עליון --- */
 .nav-wrapper { 
     position: absolute; 
     left: 5%; 
@@ -253,29 +253,14 @@ header {
     opacity: 0.6;
 }
 
-/* --- דף פרויקט פנימי --- */
-header + main > div:first-child:not(.about-text-col) {
+/* --- טקסט מתחת לתמונות בדפי פרויקט --- */
+.project-bottom-text {
     width: 80vw !important; 
     max-width: 1100px !important; 
-    margin-left: auto !important; 
-    margin-right: auto !important; 
-    padding-left: 0 !important; 
-    padding-right: 0 !important;
+    margin: 40px auto 0 auto !important; 
     text-align: left !important; 
-    box-sizing: border-box !important;
-    padding-top: 40px !important; 
-}
-
-#project-title {
-    text-align: left !important;
-    margin-left: 0 !important;
-    padding-left: 0 !important;
-    margin-top: 0 !important;
-    font-size: 20px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    font-weight: 400;
-    margin-bottom: 20px !important;
+    direction: ltr !important; 
+    padding: 0 !important;
 }
 
 .project-meta { 
@@ -285,8 +270,6 @@ header + main > div:first-child:not(.about-text-col) {
     display: flex !important; 
     flex-direction: column !important; 
     gap: 6px !important; 
-    direction: ltr !important; 
-    text-align: left !important; 
     margin: 0 0 20px 0 !important; 
 }
 
@@ -300,11 +283,8 @@ header + main > div:first-child:not(.about-text-col) {
     font-size: 15px; 
     line-height: 1.6; 
     color: #333; 
-    text-align: left !important; 
-    direction: ltr !important; 
     white-space: pre-wrap !important; 
-    margin-top: 0 !important;
-    margin-bottom: 15px !important; 
+    margin: 0 0 15px 0 !important; 
 }
 
 .project-description a { color: inherit; text-decoration: none; transition: all 0.3s ease; border-bottom: 1px solid transparent; }
@@ -396,7 +376,7 @@ header + main > div:first-child:not(.about-text-col) {
 }
 
 /* =========================================
-   PROJECT SLIDER & DYNAMIC CREDITS (CENTERED NO-SCROLL)
+   PROJECT SLIDER & DYNAMIC CREDITS
    ========================================= */
 
 .carousel-container {
@@ -422,14 +402,13 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* התמונות מורכזו חזרה לאמצע החלון (justify-content: center) */
 .carousel-slide {
     flex: 0 0 100% !important;
     width: 100% !important;
     height: 55vh !important; 
     min-height: 350px !important;
     display: flex !important;
-    justify-content: center !important;
+    justify-content: center !important; 
     align-items: flex-start !important; 
     box-sizing: border-box !important;
 }
@@ -477,7 +456,7 @@ header + main > div:first-child:not(.about-text-col) {
     width: 100% !important;
 }
 
-/* מיקום החצים של הקרוסלה מחוץ לגבולות התמונה */
+/* מיקום החצים קוצץ מ-50px ל-20px כדי לא לברוח במסכים קטנים כמו מקבוק 14 אינץ' */
 .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -505,10 +484,10 @@ header + main > div:first-child:not(.about-text-col) {
     transform: translateY(-50%) scale(1.05);
 }
 
-.carousel-arrow.prev { left: -50px; }
-.carousel-arrow.next { right: -50px; }
+.carousel-arrow.prev { left: -20px; }
+.carousel-arrow.next { right: -20px; }
 
-/* נקודות ניווט של הקרוסלה */
+/* נקודות ניווט */
 .carousel-dots {
     display: flex;
     justify-content: center;
@@ -586,7 +565,7 @@ header + main > div:first-child:not(.about-text-col) {
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     body.nav-open #site-wrapper { transform: translateX(var(--nav-width)); margin-left: 0; width: 100%; }
     
-    header + main > div:first-child:not(.about-text-col),
+    .project-bottom-text,
     .contact-content,
     .about-grid-container {
         width: 100% !important;
@@ -595,14 +574,10 @@ header + main > div:first-child:not(.about-text-col) {
         padding-right: 5% !important;
     }
     
-    .project-description { margin-bottom: 40px !important; }
-
-    /* ========================================================
-       REVERT TO VERTICAL SCROLL ON MOBILE
-       ======================================================== */
+    /* REVERT TO VERTICAL SCROLL ON MOBILE */
     .carousel-container {
         padding: 0 !important; 
-        margin-bottom: 60px !important;
+        margin-bottom: 40px !important;
         width: 100% !important;
     }
 
@@ -632,6 +607,8 @@ header + main > div:first-child:not(.about-text-col) {
         height: auto !important;
         max-height: none !important; 
         margin-bottom: 12px !important; 
+        padding-left: 5% !important;
+        padding-right: 5% !important;
     }
 
     .carousel-slide .gallery-figure {
@@ -639,7 +616,10 @@ header + main > div:first-child:not(.about-text-col) {
         height: auto !important;
     }
 
-    /* הסתרת חצים ונקודות של הקרוסלה בלבד, הניווט למטה נשאר */
+    .photo-credit {
+        padding-left: 5% !important;
+    }
+
     .carousel-arrow, .carousel-dots {
         display: none !important;
     }
