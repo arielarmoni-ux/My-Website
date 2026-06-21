@@ -1,7 +1,6 @@
 Overtones: Sound and Art
-Role: Exhibition design
-For: Israel Museum Jerusalem
-Date: 2026
+Client: Israel Museum Jerusalem
+Year: 2026
 Curator: Talia Amar
 Project Manager: Itamar Bernstein
 Graphic Design: Idan Vaaknin
