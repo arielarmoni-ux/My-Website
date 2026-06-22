@@ -156,35 +156,11 @@
                 let currentIndex = 0;
                 let totalSlides = 0;
 
-                // עדכון: היישור הדינמי עובד עכשיו גם על הכותרת וגם על הטקסט התחתון!
-                function alignTextToImage() {
-                    if (window.innerWidth <= 768) {
-                        document.querySelectorAll('.project-top-text, .project-bottom-text').forEach(el => {
-                            el.style.maxWidth = '100%';
-                        });
-                        return;
-                    }
-                    setTimeout(() => {
-                        const activeSlide = document.querySelectorAll('.carousel-slide')[currentIndex];
-                        if (activeSlide) {
-                            const img = activeSlide.querySelector('img');
-                            if (img && img.offsetWidth > 0) {
-                                document.querySelectorAll('.project-top-text, .project-bottom-text').forEach(el => {
-                                    el.style.maxWidth = img.offsetWidth + 'px';
-                                });
-                            }
-                        }
-                    }, 50);
-                }
-
-                window.addEventListener('resize', alignTextToImage);
-
                 function updateCarousel() {
                     track.style.transform = `translateX(-${currentIndex * 100}%)`;
                     document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
                         dot.classList.toggle('active', index === currentIndex);
                     });
-                    alignTextToImage();
                 }
 
                 prevBtn.addEventListener('click', (e) => {
@@ -261,11 +237,6 @@
                                 addSlideToCarousel(figure);
                             } else {
                                 addSlideToCarousel(img); 
-                            }
-                            
-                            // קריאה ראשונית ליישור הטקסט כשהתמונה הראשונה נטענת
-                            if (totalSlides === 1) {
-                                setTimeout(alignTextToImage, 100);
                             }
                             resolve(true);
                         };
