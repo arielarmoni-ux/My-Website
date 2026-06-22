@@ -1,4 +1,4 @@
-/* style.css - Full Premium Aligned Portfolio Layout (Original Vertical Flow + Performance UX) */
+/* style.css - Full Premium Aligned Portfolio Layout (v5 - Absolute Mobile Fix) */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -54,7 +54,7 @@ body.nav-open #site-wrapper {
 
 body.nav-open #side-nav { left: 0; }
 
-/* --- ניווט טקסטואלי עליון --- */
+/* --- ניווט טקסטואלי עליון - טיפוגרפיה מעודנת ומיקום מושלם בדסקטופ --- */
 .nav-wrapper { 
     position: absolute; 
     left: 5%; 
@@ -88,10 +88,22 @@ body.nav-open #side-nav { left: 0; }
 
 .nav-label:hover { color: var(--muted); }
 
+/* --- הסתרת הניווט העליון באופן גלובלי בכל דפי האתר כאשר הסיידבר פתוח --- */
 body.nav-open .nav-wrapper {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+}
+
+/* --- התאמת הניווט העליון לדפים פנימיים בדסקטופ --- */
+body:not(:has(.portfolio-grid)) .nav-wrapper {
+    left: calc(50% - 40vw) !important;
+}
+
+@media (min-width: 1375px) {
+    body:not(:has(.portfolio-grid)) .nav-wrapper {
+        left: calc(50% - 550px) !important;
+    }
 }
 
 /* --- הגדרות סיידבר --- */
@@ -222,8 +234,36 @@ header {
     font-weight: 500; 
 }
 
-/* --- דף פרויקט פנימי (טקסטים מיושרים למרכז העמוד, כמו במקור) --- */
-header + main > div:first-child:not(.about-text-col) {
+/* --- חצי ניווט פנימיים בדף פרויקט --- */
+.nav-arrow { 
+    position: fixed; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    z-index: 2500; 
+    text-decoration: none; 
+    color: var(--main); 
+    font-size: clamp(24px, 2.5vw, 40px); 
+    opacity: 0.2; 
+    padding: 10px; 
+    transition: all 0.3s ease; 
+}
+
+#prev-project { left: calc(50% - 40vw - 50px) !important; }
+#next-project { right: calc(50% - 40vw - 50px) !important; }
+
+@media (max-width: 1300px) {
+    #prev-project { left: 2% !important; }
+    #next-project { right: 2% !important; }
+}
+
+.nav-arrow:hover { 
+    opacity: 1; 
+    color: var(--muted); 
+    transform: translateY(-50%) scale(1.1); 
+}
+
+/* --- דף פרויקט פנימי --- */
+header + main > div:first-child {
     width: 80vw !important; 
     max-width: 1100px !important; 
     margin-left: auto !important; 
@@ -232,7 +272,7 @@ header + main > div:first-child:not(.about-text-col) {
     padding-right: 0 !important;
     text-align: left !important; 
     box-sizing: border-box !important;
-    padding-top: 40px !important; 
+    padding-top: 60px !important;
 }
 
 #project-title {
@@ -256,7 +296,7 @@ header + main > div:first-child:not(.about-text-col) {
     gap: 6px !important; 
     direction: ltr !important; 
     text-align: left !important; 
-    margin: 0 0 20px 0 !important; 
+    margin: 0 0 30px 0 !important;
 }
 
 .meta-item .label { font-weight: 400; color: var(--muted); margin-right: 8px; }
@@ -273,31 +313,13 @@ header + main > div:first-child:not(.about-text-col) {
     direction: ltr !important; 
     white-space: pre-wrap !important; 
     margin-top: 0 !important;
-    margin-bottom: 40px !important; 
+    margin-bottom: 70px !important; 
 }
 
 .project-description a { color: inherit; text-decoration: none; transition: all 0.3s ease; border-bottom: 1px solid transparent; }
 .project-description a:hover { color: var(--muted); border-bottom: 1px solid var(--muted); }
 
-/* --- חיצי ניווט צדדיים --- */
-.nav-arrow {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 28px;
-    color: var(--main);
-    text-decoration: none;
-    z-index: 2000;
-    opacity: 0.5;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.nav-arrow:hover {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.1);
-}
-
-/* --- גלריית תמונות פרויקט (עם אנימציית Fade-In חלקה) --- */
+/* --- גלריית תמונות פרויקט --- */
 .gallery { 
     max-width: 100%; 
     margin: 0 auto; 
@@ -307,24 +329,65 @@ header + main > div:first-child:not(.about-text-col) {
     align-items: center; 
 }
 
-.gallery-img { 
+.gallery img { 
     width: 80vw; 
     max-width: 1100px; 
     height: auto; 
     display: block; 
     margin-top: 0 !important;
     margin-bottom: 35px !important; 
-    opacity: 0; /* מתחיל שקוף */
-    transform: translateY(15px); /* מופיע טיפה מלמטה */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* אנימציה זורמת */
 }
 
-/* המחלקה הזו מתווספת אוטומטית ברגע שהתמונה יורדת מהשרת */
-.gallery-img.loaded {
-    opacity: 1;
-    transform: translateY(0);
+.gallery img:last-child {
+    margin-bottom: 60px !important;
 }
 
+/* --- דף אודות (About Page) --- */
+.about-content {
+    width: 80vw !important;
+    max-width: 1100px !important;
+    margin: 0 auto;
+    padding: 60px 0 100px !important; 
+    display: grid; 
+    grid-template-columns: 1.1fr 1fr; 
+    gap: 80px; 
+    align-items: start; 
+    direction: ltr;
+}
+
+.about-text p { 
+    font-size: 15px; 
+    line-height: 1.7; 
+    margin-bottom: 30px; 
+    color: #333; 
+}
+
+.clients-section { margin-top: 40px; }
+.clients-section h3 { 
+    font-size: 11px; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    color: var(--muted); 
+    margin-bottom: 25px; 
+    font-weight: 500;
+}
+
+.clients-list { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+    display: flex; 
+    flex-direction: column; 
+    gap: 14px; 
+}
+
+.clients-list li { 
+    font-size: 13px; 
+    color: #444; 
+    border-bottom: none !important; 
+    padding-bottom: 0 !important; 
+    max-width: 100%; 
+}
 
 /* --- דף קשר (Contact Page) --- */
 .contact-content {
@@ -336,26 +399,67 @@ header + main > div:first-child:not(.about-text-col) {
     direction: ltr;
 }
 
-/* =========================================
-   NEW ABOUT PAGE LAYOUT (FIXED IMAGE SIZE)
-   ========================================= */
-
-.about-grid-container {
-    display: grid !important;
-    grid-template-columns: 1fr 300px !important; 
-    gap: 80px !important;
-    width: 80vw !important;
-    max-width: 1100px !important;
-    margin: 0 auto !important;
-    padding: 80px 0 100px !important;
-    align-items: start !important;
-    direction: ltr !important;
-    box-sizing: border-box !important;
+/* --- מובייל והתאמות רספונסיביות - נעילת מירכוז מוחלטת ואטומה לשינויי דפים --- */
+@media (max-width: 1024px) {
+    .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
+    .about-content { grid-template-columns: 1fr; gap: 40px; }
 }
 
-.about-text-col {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    text-align: left !important;
-    height:
+@media (max-width: 768px) {
+    header { 
+        padding-top: 30px !important; 
+        min-height: auto !important; 
+        padding-bottom: 15px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; 
+    }
+    
+    /* פתרון שורש הבעיה: כפיית איפוס מוחלטת שדורסת את חוקי ה-not(:has) של הדפים הפנימיים במובייל */
+    .nav-wrapper,
+    body .nav-wrapper,
+    body:not(:has(.portfolio-grid)) .nav-wrapper { 
+        position: relative !important; 
+        left: auto !important; 
+        right: auto !important;
+        top: auto !important; 
+        margin: 15px auto 20px auto !important; 
+        width: 100% !important; 
+        max-width: 100% !important;
+        display: flex !important; 
+        justify-content: center !important; 
+        align-items: center !important;
+        transform: none !important;
+    }
+    
+    .main-nav-links { 
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 20px !important; 
+        width: auto !important;
+    }
+    
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    body.nav-open #site-wrapper { transform: translateX(var(--nav-width)); margin-left: 0; width: 100%; }
+    
+    .gallery img,
+    header + main > div:first-child,
+    .about-content,
+    .contact-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
+    
+    .project-description { margin-bottom: 40px !important; }
+    .gallery img { margin-bottom: 25px !important; }
+    
+    #prev-project, #next-project { display: none; }
+}
+
+@media (max-width: 480px) {
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .logo { font-size: 24px; letter-spacing: 3px; }
+}
