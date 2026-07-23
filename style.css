@@ -501,8 +501,8 @@ header {
     transform: translateY(-50%) scale(1.05);
 }
 
-.carousel-arrow.prev { left: -20px; }
-.carousel-arrow.next { right: -20px; }
+.carousel-arrow.prev { left: -10px; }
+.carousel-arrow.next { right: -10px; }
 
 /* נקודות ניווט */
 .carousel-dots {
