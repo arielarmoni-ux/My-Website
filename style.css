@@ -398,8 +398,8 @@ header {
 
 .carousel-container {
     position: relative;
-    width: 90vw !important;
-    max-width: 1400px !important;
+    width: 95vw !important;
+    max-width: 1600px !important;
     margin: 0 auto 10px auto !important; 
     padding: 0 !important; 
     direction: ltr !important;
