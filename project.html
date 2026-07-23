@@ -116,8 +116,8 @@
                         const imgNum = line.substring(0, 2);
                         if (line.includes(' - ')) {
                             let creditText = line.split(' - ').slice(1).join(' - ').trim();
-                            if (creditText.toLowerCase().endsWith('.jpg')) creditText = creditText.slice(0, -4);
-                            if (creditText.toLowerCase().endsWith('.jpeg')) creditText = creditText.slice(0, -5);
+                            if (creditText.toLowerCase().endsWith('.webp')) creditText = creditText.slice(0, -4);
+                            if (creditText.toLowerCase().endsWith('.webp')) creditText = creditText.slice(0, -5);
                             if (creditText.toLowerCase().endsWith('.png')) creditText = creditText.slice(0, -4);
                             creditsMap[imgNum] = creditText.trim();
                         }
@@ -236,7 +236,7 @@
                 for (let i = 1; i <= 50; i++) {
                     const imgNum = i.toString().padStart(2, '0');
                     const img = document.createElement('img');
-                    img.src = `${base}/images/${folder}/${imgNum}.jpg`;
+                    img.src = `${base}/images/${folder}/${imgNum}.webp`;
                     img.alt = `${projectTitle} - image ${i}`;
 
                     const ok = await new Promise((resolve) => {
