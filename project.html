@@ -30,7 +30,7 @@
             <div class="sub-logo" style="font-size: 13px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-top: 8px;">Exhibition Architecture</div>
         </header>
 
-        <main>
+        <main id="project-main">
             <div class="project-top-text">
                 <h1 id="project-title"></h1>
             </div>
@@ -190,17 +190,21 @@
                         });
                         return;
                     }
-                    setTimeout(() => {
-                        const activeSlide = document.querySelectorAll('.carousel-slide')[currentIndex];
-                        if (activeSlide) {
-                            const img = activeSlide.querySelector('img');
-                            if (img && img.offsetWidth > 0) {
-                                document.querySelectorAll('.project-top-text, .project-bottom-text').forEach(el => {
-                                    el.style.maxWidth = img.offsetWidth + 'px';
-                                });
-                            }
+                    setTimeout(alignNow, 50);
+                }
+
+                // מיישר את רוחב הטקסט לרוחב התמונה הפעילה מיד (בלי השהיה)
+                function alignNow() {
+                    if (window.innerWidth <= 768) return;
+                    const activeSlide = document.querySelectorAll('.carousel-slide')[currentIndex];
+                    if (activeSlide) {
+                        const img = activeSlide.querySelector('img');
+                        if (img && img.offsetWidth > 0) {
+                            document.querySelectorAll('.project-top-text, .project-bottom-text').forEach(el => {
+                                el.style.maxWidth = img.offsetWidth + 'px';
+                            });
                         }
-                    }, 50);
+                    }
                 }
 
                 window.addEventListener('resize', alignTextToImage);
@@ -271,7 +275,10 @@
                     img.decoding = 'async';
                     if (i === 1) {
                         img.fetchPriority = 'high';
-                        img.addEventListener('load', () => setTimeout(alignTextToImage, 100), { once: true });
+                        firstImageReady = new Promise(resolve => {
+                            img.addEventListener('load', resolve, { once: true });
+                            img.addEventListener('error', resolve, { once: true });
+                        });
                     }
                     img.src = `${base}/images/${folder}/${imgNum}.webp`;
 
@@ -298,9 +305,25 @@
                     }
                 }
 
+                // מחכים לתמונה הראשונה ולפונט (עד 2.5 שניות לכל היותר), מיישרים, ורק אז חושפים
+                const timeout = new Promise(r => setTimeout(r, 2500));
+                await Promise.race([
+                    Promise.all([firstImageReady, document.fonts ? document.fonts.ready : null]),
+                    timeout
+                ]);
+                alignNow();
+
             } catch (e) { console.error(e); }
         }
-        initProject();
+
+        // התוכן מוסתר עד שהכול מוכן, ואז מופיע בבת אחת – בלי קפיצות
+        let firstImageReady = Promise.resolve();
+        function revealProject() {
+            requestAnimationFrame(() => {
+                document.body.classList.add('project-ready');
+            });
+        }
+        initProject().finally(revealProject);
     </script>
 </body>
 </html>

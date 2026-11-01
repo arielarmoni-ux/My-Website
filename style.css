@@ -265,6 +265,22 @@ header {
     transition: max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* דף פרויקט: התוכן מוסתר עד שהכול נטען, ואז מופיע בבת אחת */
+#project-main {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.project-ready #project-main {
+    opacity: 1;
+}
+
+/* לפני החשיפה – בלי אנימציית רוחב, כדי שהטקסט לא "יתכווץ" מול העיניים */
+body:not(.project-ready) .project-top-text,
+body:not(.project-ready) .project-bottom-text {
+    transition: none !important;
+}
+
 .project-top-text {
     margin-top: 50px !important;
     margin-bottom: 30px !important;
