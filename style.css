@@ -805,3 +805,9 @@ body:not(.project-ready) .carousel-arrow {
         padding: 14px 0 26px;
     }
 }
+
+/* בזמן שינוי גודל – החצים זזים יחד עם התמונה, בלי השהיה */
+.carousel-container.resizing .carousel-arrow,
+.carousel-container.resizing .next-project-label {
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+}

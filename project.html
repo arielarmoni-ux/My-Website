@@ -269,6 +269,21 @@
 
                 window.addEventListener('resize', alignTextToImage);
 
+                // כשאזור התמונה משנה גודל (למשל כשרשימת הפרויקטים נפתחת בצד) –
+                // החצים עוקבים אחרי התמונה בזמן אמת, בלי אנימציה שמפגרת מאחור
+                if ('ResizeObserver' in window) {
+                    let resizeTimer;
+                    new ResizeObserver(() => {
+                        carouselContainer.classList.add('resizing');
+                        requestAnimationFrame(alignNow);
+                        clearTimeout(resizeTimer);
+                        resizeTimer = setTimeout(() => {
+                            alignNow();
+                            carouselContainer.classList.remove('resizing');
+                        }, 150);
+                    }).observe(carouselContainer);
+                }
+
                 function updateCarousel() {
                     track.style.transform = `translateX(-${currentIndex * 100}%)`;
                     document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
