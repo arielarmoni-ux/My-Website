@@ -52,6 +52,29 @@
 
     <script src="sidebar.js"></script>
     <script>
+        // סופר כמה תמונות רצופות (01.webp, 02.webp ...) יש בתיקייה.
+        // בודק קבוצות של 12 במקביל ועוצר בתמונה החסרה הראשונה.
+        async function countImages(base, folder, max = 50, batchSize = 12) {
+            const exists = (n) => fetch(`${base}/images/${folder}/${String(n).padStart(2, '0')}.webp`, { method: 'HEAD' })
+                .then(r => r.ok)
+                .catch(() => false);
+
+            let count = 0;
+            for (let start = 1; start <= max; start += batchSize) {
+                const nums = [];
+                for (let n = start; n < start + batchSize && n <= max; n++) nums.push(n);
+                const results = await Promise.all(nums.map(exists));
+                const firstMissing = results.indexOf(false);
+                if (firstMissing === -1) {
+                    count += results.length;
+                } else {
+                    count += firstMissing;
+                    break;
+                }
+            }
+            return count;
+        }
+
         async function initProject() {
             const folder = new URLSearchParams(window.location.search).get('folder');
             if (!folder) return;
@@ -67,6 +90,9 @@
 
                 const base = typeof baseURL !== 'undefined' ? baseURL : '';
                 const cb = typeof cacheBuster !== 'undefined' ? cacheBuster : Date.now();
+
+                // מתחילים לספור תמונות כבר עכשיו, במקביל לטעינת info.txt
+                const imageCountPromise = countImages(base, folder);
 
                 const res = await fetch(`${base}/images/${folder}/info.txt?v=${cb}`);
                 const fullText = await res.text();
@@ -233,49 +259,43 @@
                     }
                 }
 
-                for (let i = 1; i <= 50; i++) {
+                // שלב 1: בודקים במקביל (בקשות HEAD קטנות) כמה תמונות קיימות,
+                // במקום לחכות שכל תמונה תיטען במלואה לפני שבודקים את הבאה.
+                const imageCount = await imageCountPromise;
+
+                // שלב 2: בונים את כל השקופיות והנקודות בבת אחת
+                for (let i = 1; i <= imageCount; i++) {
                     const imgNum = i.toString().padStart(2, '0');
                     const img = document.createElement('img');
-                    img.src = `${base}/images/${folder}/${imgNum}.webp`;
                     img.alt = `${projectTitle} - image ${i}`;
+                    img.decoding = 'async';
+                    if (i === 1) {
+                        img.fetchPriority = 'high';
+                        img.addEventListener('load', () => setTimeout(alignTextToImage, 100), { once: true });
+                    }
+                    img.src = `${base}/images/${folder}/${imgNum}.webp`;
 
-                    const ok = await new Promise((resolve) => {
-                        img.onload = () => {
-                            let finalCredit = "";
-                            if (creditsMap[imgNum]) {
-                                finalCredit = creditsMap[imgNum]; 
-                            } else if (globalCredit) {
-                                finalCredit = `Photo by ${globalCredit}`; 
-                            }
+                    let finalCredit = "";
+                    if (creditsMap[imgNum]) {
+                        finalCredit = creditsMap[imgNum];
+                    } else if (globalCredit) {
+                        finalCredit = `Photo by ${globalCredit}`;
+                    }
 
-                            if (finalCredit !== "") {
-                                const figure = document.createElement('figure');
-                                figure.className = 'gallery-figure';
-                                
-                                const figcaption = document.createElement('figcaption');
-                                figcaption.className = 'photo-credit';
-                                figcaption.textContent = finalCredit;
-                                
-                                figure.appendChild(img);
-                                figure.appendChild(figcaption);
-                                addSlideToCarousel(figure);
-                            } else {
-                                addSlideToCarousel(img); 
-                            }
-                            
-                            // קריאה ראשונית ליישור הטקסט כשהתמונה הראשונה נטענת
-                            if (totalSlides === 1) {
-                                setTimeout(alignTextToImage, 100);
-                            }
-                            resolve(true);
-                        };
-                        img.onerror = () => {
-                            img.remove();
-                            resolve(false);
-                        };
-                    });
+                    if (finalCredit !== "") {
+                        const figure = document.createElement('figure');
+                        figure.className = 'gallery-figure';
 
-                    if (!ok) break;
+                        const figcaption = document.createElement('figcaption');
+                        figcaption.className = 'photo-credit';
+                        figcaption.textContent = finalCredit;
+
+                        figure.appendChild(img);
+                        figure.appendChild(figcaption);
+                        addSlideToCarousel(figure);
+                    } else {
+                        addSlideToCarousel(img);
+                    }
                 }
 
             } catch (e) { console.error(e); }
