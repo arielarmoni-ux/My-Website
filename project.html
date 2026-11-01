@@ -177,6 +177,18 @@
                 carouselContainer.appendChild(trackWrapper);
                 carouselContainer.appendChild(nextBtn);
                 carouselContainer.appendChild(dotsContainer);
+
+                // "next project" שמופיע ליד החץ הימני בתמונה האחרונה
+                const nextProjectHref = idx !== -1 && folders.length > 1
+                    ? document.getElementById('next-project').href : null;
+                const nextProjectLabel = document.createElement('a');
+                nextProjectLabel.className = 'next-project-label';
+                nextProjectLabel.textContent = 'next project';
+                if (nextProjectHref) {
+                    nextProjectLabel.href = nextProjectHref;
+                    carouselContainer.appendChild(nextProjectLabel);
+                }
+
                 gallery.appendChild(carouselContainer);
 
                 let currentIndex = 0;
@@ -223,6 +235,36 @@
                     nextBtn.style.left = (containerWidth - left - btnW) + 'px';
                     nextBtn.style.right = 'auto';
                     prevBtn.style.top = nextBtn.style.top = top + 'px';
+                    positionNextProjectLabel(img, left, btnW, top, containerWidth, viewportOffset);
+                }
+
+                const isLastSlide = () => totalSlides > 1 && currentIndex === totalSlides - 1;
+
+                // מימין לחץ; אם אין מספיק מקום במסך – בשורת הקרדיט, מיושר לפינה הימנית של התמונה
+                function positionNextProjectLabel(img, arrowLeft, btnW, top, containerWidth, viewportOffset) {
+                    if (!nextProjectHref) return;
+                    const nextLeft = containerWidth - arrowLeft - btnW;
+                    const labelW = nextProjectLabel.offsetWidth;
+                    const besideLeft = nextLeft + btnW + 14;
+                    const fits = viewportOffset + besideLeft + labelW <= window.innerWidth - 10;
+                    nextProjectLabel.classList.toggle('below', !fits);
+                    if (fits) {
+                        nextProjectLabel.style.left = besideLeft + 'px';
+                        nextProjectLabel.style.top = top + 'px';
+                    } else {
+                        const imgRight = (containerWidth + img.offsetWidth) / 2;
+                        nextProjectLabel.style.left = (imgRight - labelW) + 'px';
+                        nextProjectLabel.style.top = (img.offsetTop + img.offsetHeight + 14) + 'px';
+                    }
+                }
+
+                function updateNextProjectLabel() {
+                    if (!nextProjectHref) return;
+                    nextProjectLabel.classList.toggle('visible', isLastSlide());
+                }
+
+                function goToNextProject() {
+                    window.location.href = nextProjectHref;
                 }
 
                 window.addEventListener('resize', alignTextToImage);
@@ -233,6 +275,7 @@
                         dot.classList.toggle('active', index === currentIndex);
                     });
                     alignTextToImage();
+                    updateNextProjectLabel();
                 }
 
                 prevBtn.addEventListener('click', (e) => {
@@ -245,7 +288,9 @@
 
                 nextBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (currentIndex < totalSlides - 1) {
+                    if (nextProjectHref && isLastSlide()) {
+                        goToNextProject();
+                    } else if (currentIndex < totalSlides - 1) {
                         currentIndex++;
                         updateCarousel();
                     }
@@ -256,7 +301,10 @@
                     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
                     if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
                     if (window.innerWidth <= 768 || totalSlides <= 1) return;
-                    if (e.key === 'ArrowRight' && currentIndex < totalSlides - 1) {
+                    if (e.key === 'ArrowRight' && nextProjectHref && isLastSlide()) {
+                        e.preventDefault();
+                        goToNextProject();
+                    } else if (e.key === 'ArrowRight' && currentIndex < totalSlides - 1) {
                         e.preventDefault();
                         currentIndex++;
                         updateCarousel();

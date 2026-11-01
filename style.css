@@ -669,3 +669,32 @@ body:not(.project-ready) .carousel-arrow {
     .portfolio-grid { grid-template-columns: 1fr; }
     .logo { font-size: 24px; letter-spacing: 3px; }
 }
+
+/* "next project" ליד החץ הימני – מופיע רק בתמונה האחרונה */
+.next-project-label {
+    position: absolute;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    z-index: 20;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--main);
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.next-project-label.visible {
+    opacity: 0.6;
+    pointer-events: auto;
+}
+
+.next-project-label.visible:hover {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .next-project-label { display: none !important; }
+}
