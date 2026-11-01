@@ -761,7 +761,7 @@ body:not(.project-ready) .carousel-arrow {
 
     /* עמודת הטקסט – קטנה ושקטה */
     #project-title {
-        font-size: 15px;
+        font-size: 16px;
         letter-spacing: 3px;
         line-height: 1.4;
     }
@@ -778,20 +778,20 @@ body:not(.project-ready) .carousel-arrow {
     }
 
     #project-main .meta-item .label {
-        font-size: 9px;
+        font-size: 10px;
         letter-spacing: 1.5px;
         text-transform: uppercase;
         margin: 0;
     }
 
     #project-main .meta-item .value {
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 400;
         color: #333;
     }
 
     #project-main .project-description {
-        font-size: 12px !important;
+        font-size: 13px !important;
         line-height: 1.65 !important;
         color: var(--muted) !important;
         margin: 22px 0 0 !important;
