@@ -698,3 +698,110 @@ body:not(.project-ready) .carousel-arrow {
 @media (max-width: 768px) {
     .next-project-label { display: none !important; }
 }
+
+/* =========================================
+   PROJECT PAGE LAYOUT – text column on the left (screens 1100px and wider)
+   הכול נכנס במסך אחד בלי גלילה. מסכים צרים יותר ומובייל לא מושפעים.
+   ========================================= */
+@media (min-width: 1100px) {
+    #project-main {
+        display: grid;
+        grid-template-columns: 1fr 220px;          /* בדף RTL: העמודה של 220px מוצגת משמאל */
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "gallery title"
+            "gallery info"
+            "nav     .";
+        gap: 0 36px;
+        height: calc(100vh - 91px);
+        padding: 28px 4vw 0;
+        box-sizing: border-box;
+    }
+
+    #project-main .project-top-text    { grid-area: title; }
+    #project-main #gallery             { grid-area: gallery; }
+    #project-main .project-bottom-text { grid-area: info; overflow: auto; }
+    #project-main .project-nav-bottom  { grid-area: nav; }
+
+    #project-main .project-top-text,
+    #project-main .project-bottom-text {
+        width: auto !important;
+        max-width: none !important;
+        margin: 0 !important;
+    }
+
+    #project-main .carousel-container {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 64px !important;   /* מקום לחצים משני צדי התמונה */
+    }
+
+    #project-main .carousel-slide {
+        height: calc(100vh - 91px - 28px - 60px - 52px) !important;
+        min-height: 300px !important;
+    }
+
+    #project-main .carousel-dots { margin-top: 12px !important; }
+
+    /* כל תמונה בגודל המקסימלי שנכנס, לפי היחס שלה (--ar נקבע ב-JS), כך שהקרדיט צמוד אליה */
+    #project-main .carousel-slide .gallery-figure { height: auto !important; }
+    #project-main .carousel-slide .gallery-figure img,
+    #project-main .carousel-slide > img {
+        --max-w: calc(92vw - 384px);
+        --max-h: calc(100vh - 91px - 28px - 60px - 52px - 22px);
+        width: min(var(--max-w), calc(var(--max-h) * var(--ar, 1.5))) !important;
+        height: auto !important;
+        max-height: none !important;
+        aspect-ratio: var(--ar, 3 / 2);
+    }
+    #project-main .carousel-slide > img {
+        --max-h: calc(100vh - 91px - 28px - 60px - 52px);
+    }
+
+    /* עמודת הטקסט – קטנה ושקטה */
+    #project-title {
+        font-size: 15px;
+        letter-spacing: 3px;
+        line-height: 1.4;
+    }
+
+    #project-main .project-meta {
+        margin: 18px 0 0 !important;
+        gap: 10px !important;
+    }
+
+    #project-main .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    #project-main .meta-item .label {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    #project-main .meta-item .value {
+        font-size: 12px;
+        font-weight: 400;
+        color: #333;
+    }
+
+    #project-main .project-description {
+        font-size: 12px !important;
+        line-height: 1.65 !important;
+        color: var(--muted) !important;
+        margin: 22px 0 0 !important;
+    }
+
+    /* previous | next – במרכז, מתחת לתמונה */
+    #project-main .project-nav-bottom {
+        justify-content: center;
+        align-self: start;
+        width: auto;
+        padding: 14px 0 26px;
+    }
+}

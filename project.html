@@ -355,6 +355,9 @@
                     const img = document.createElement('img');
                     img.alt = `${projectTitle} - image ${i}`;
                     img.decoding = 'async';
+                    img.addEventListener('load', () => {
+                        img.style.setProperty('--ar', img.naturalWidth / img.naturalHeight);
+                    }, { once: true });
                     if (i === 1) {
                         img.fetchPriority = 'high';
                         firstImageReady = new Promise(resolve => {
