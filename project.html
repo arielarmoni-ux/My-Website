@@ -251,6 +251,22 @@
                     }
                 });
 
+                // מעבר בין תמונות עם החצים במקלדת (← →)
+                document.addEventListener('keydown', (e) => {
+                    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+                    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+                    if (window.innerWidth <= 768 || totalSlides <= 1) return;
+                    if (e.key === 'ArrowRight' && currentIndex < totalSlides - 1) {
+                        e.preventDefault();
+                        currentIndex++;
+                        updateCarousel();
+                    } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                        e.preventDefault();
+                        currentIndex--;
+                        updateCarousel();
+                    }
+                });
+
                 function addSlideToCarousel(element) {
                     const slide = document.createElement('div');
                     slide.className = 'carousel-slide';
