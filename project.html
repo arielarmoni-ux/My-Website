@@ -203,8 +203,26 @@
                             document.querySelectorAll('.project-top-text, .project-bottom-text').forEach(el => {
                                 el.style.maxWidth = img.offsetWidth + 'px';
                             });
+                            positionArrows(img);
                         }
                     }
+                }
+
+                // ממקם את החצים צמוד לתמונה הפעילה: 20px מהקצה, באמצע הגובה של התמונה
+                function positionArrows(img) {
+                    const GAP = 20;
+                    const containerWidth = carouselContainer.offsetWidth;
+                    const btnW = prevBtn.offsetWidth || 40;
+                    const imgLeft = (containerWidth - img.offsetWidth) / 2;
+                    const viewportOffset = carouselContainer.getBoundingClientRect().left;
+                    // לא לתת לחץ לצאת מהמסך
+                    const minLeft = 10 - viewportOffset;
+                    const left = Math.max(minLeft, imgLeft - GAP - btnW);
+                    const top = img.offsetTop + img.offsetHeight / 2;
+                    prevBtn.style.left = left + 'px';
+                    nextBtn.style.left = (containerWidth - left - btnW) + 'px';
+                    nextBtn.style.right = 'auto';
+                    prevBtn.style.top = nextBtn.style.top = top + 'px';
                 }
 
                 window.addEventListener('resize', alignTextToImage);

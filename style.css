@@ -506,8 +506,14 @@ body:not(.project-ready) .project-bottom-text {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease,
+                left 0.6s cubic-bezier(0.25, 1, 0.5, 1), top 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* לפני שהדף נחשף – החצים קופצים ישר למקום, בלי אנימציה */
+body:not(.project-ready) .carousel-arrow {
+    transition: none !important;
 }
 
 .carousel-arrow:hover {
