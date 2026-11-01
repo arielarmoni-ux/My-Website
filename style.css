@@ -706,7 +706,7 @@ body:not(.project-ready) .carousel-arrow {
 @media (min-width: 1100px) {
     #project-main {
         display: grid;
-        grid-template-columns: 1fr 220px;          /* בדף RTL: העמודה של 220px מוצגת משמאל */
+        grid-template-columns: minmax(0, 1fr) 220px;   /* בדף RTL: העמודה של 220px מוצגת משמאל. minmax(0) – תמונה רחבה לא תדחוף את הטקסט החוצה */
         grid-template-rows: auto 1fr auto;
         grid-template-areas:
             "gallery title"
@@ -714,12 +714,12 @@ body:not(.project-ready) .carousel-arrow {
             "nav     .";
         gap: 0 36px;
         height: calc(100vh - 91px);
-        padding: 28px 4vw 0;
+        padding: 28px 4% 0 5%;       /* 5% משמאל – הכותרת מיושרת בדיוק ל-PROJECTS שמעליה */
         box-sizing: border-box;
     }
 
     #project-main .project-top-text    { grid-area: title; }
-    #project-main #gallery             { grid-area: gallery; }
+    #project-main #gallery             { grid-area: gallery; min-width: 0; }
     #project-main .project-bottom-text { grid-area: info; overflow: auto; }
     #project-main .project-nav-bottom  { grid-area: nav; }
 
